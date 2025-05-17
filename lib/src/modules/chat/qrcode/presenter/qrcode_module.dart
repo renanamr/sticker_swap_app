@@ -1,16 +1,15 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/modules/chat/qrcode/presenter/qrcode_bloc.dart';
 import 'package:sticker_swap_app/src/modules/chat/qrcode/presenter/qrcode_screen.dart';
 
 class QRCodeModule extends Module{
   @override
-  List<Bind> get binds => [
-    Bind<QRCodeBloc>((i) => QRCodeBloc()),
-  ];
+  void binds(i) {
+    i.add<QRCodeBloc>((i) => QRCodeBloc());
+  }
 
   @override
-  List<ModularRoute> get routes =>[
-    ChildRoute('/', child: (context, args) => const QrCodeScreen()),
-  ];
+  void routes(r) {
+    r.child('/', child: (context) => const QrCodeScreen());
+  }
 }

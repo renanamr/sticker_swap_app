@@ -8,11 +8,11 @@ class RecoverScreen extends StatefulWidget {
   RecoverScreenState createState() => RecoverScreenState();
 }
 
-class RecoverScreenState extends ModularState<RecoverScreen, LoginBloc> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _password_confirm = TextEditingController();
+class RecoverScreenState extends State<RecoverScreen> {
+  final TextEditingController _email = TextEditingController();
   bool _validate = true;
+
+  final controller = Modular.get<LoginBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class RandomNumber extends StatefulWidget {
 
 class RandomNumberState extends State<RandomNumber>{
 
-  TextEditingController _randomNumber = TextEditingController();
+  final TextEditingController _randomNumber = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

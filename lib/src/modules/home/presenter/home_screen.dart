@@ -11,15 +11,17 @@ import 'package:sticker_swap_app/src/modules/sticker/presenter/sticker_module.da
 import '../../../core/entities/auth.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ModularState<HomeScreen, HomeBloc> {
+class _HomeScreenState extends State<HomeScreen> {
   Auth auth = Modular.get<Auth>();
   User user = Modular.get<User>();
+
+  final controller = Modular.get<HomeBloc>();
 
   @override
   void dispose() {

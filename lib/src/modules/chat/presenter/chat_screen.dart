@@ -7,13 +7,15 @@ import 'package:sticker_swap_app/src/modules/chat/presenter/widgets/chat_tile.da
 import 'package:sticker_swap_app/src/modules/chat/presenter/widgets/search_chat.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({super.key});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends ModularState<ChatScreen, ChatBloc> {
+class _ChatScreenState extends State<ChatScreen> {
+
+  final controller = Modular.get<ChatBloc>();
 
   @override
   void initState() {

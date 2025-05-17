@@ -13,14 +13,15 @@ import 'package:sticker_swap_app/src/modules/message_chat/presenter/widgets/mess
 
 class MessageChatScreen extends StatefulWidget {
   final Chat chat;
-  const MessageChatScreen({Key? key, required this.chat}) : super(key: key);
+  const MessageChatScreen({super.key, required this.chat});
 
   @override
   State<MessageChatScreen> createState() => _MessageChatScreenState();
 }
 
-class _MessageChatScreenState extends ModularState<MessageChatScreen, MessageChatBloc> {
+class _MessageChatScreenState extends State<MessageChatScreen> {
 
+  final controller = Modular.get<MessageChatBloc>();
 
   @override
   void initState() {

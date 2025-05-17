@@ -1,18 +1,18 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sticker_swap_app/src/config/widget_module_config.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/usecases/get_chats.dart';
 import 'package:sticker_swap_app/src/modules/chat/presenter/chat_bloc.dart';
 import 'package:sticker_swap_app/src/modules/chat/presenter/chat_screen.dart';
 
 class ChatModule extends WidgetModule{
-  @override
-  List<Bind<Object>> get binds => [
-    Bind<ChatBloc>((i)=> ChatBloc()),
-
-    Bind<IGetChats>((i) => GetChatsImpl())
-  ];
+  const ChatModule({super.key});
 
   @override
-  Widget get view => ChatScreen();
+  void binds(i) {
+    i.add<ChatBloc>(ChatBloc.new);
+    i.add<IGetChats>(GetChatsImpl.new);
+  }
 
+  @override
+  Widget get view => const ChatScreen();
 }

@@ -21,7 +21,6 @@ Future<String?> getRandomNumber(token) async{
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
-  //debugPrint(dotenv.env['API_URI']);
 
   if(response.statusCode == 200){
     var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;

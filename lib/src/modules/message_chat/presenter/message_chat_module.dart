@@ -5,14 +5,14 @@ import 'package:sticker_swap_app/src/modules/message_chat/presenter/message_chat
 
 class MessageChatModule extends Module{
   @override
-  List<Bind> get binds => [
-    Bind<MessageChatBloc>((i)=> MessageChatBloc()),
+  void binds(i) {
+    i.add<MessageChatBloc>((i)=> MessageChatBloc());
 
-    Bind<IGetMessages>((i)=> GetMessagesImpl()),
-  ];
+    i.add<IGetMessages>((i)=> GetMessagesImpl());
+  }
 
   @override
-  List<ModularRoute> get routes =>[
-    ChildRoute('/', child: (context, args) => MessageChatScreen(chat: args.data,)),
-  ];
+  void routes(r) {
+    r.child('/', child: (context) => MessageChatScreen(chat: r.args.data,));
+  }
 }

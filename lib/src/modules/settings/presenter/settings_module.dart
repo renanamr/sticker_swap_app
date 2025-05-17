@@ -1,15 +1,15 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sticker_swap_app/src/config/widget_module_config.dart';
 import 'package:sticker_swap_app/src/modules/settings/presenter/settings_bloc.dart';
 import 'package:sticker_swap_app/src/modules/settings/presenter/settings_screen.dart';
 
 class SettingsModule extends WidgetModule{
-  SettingsModule({super.key});
+  const SettingsModule({super.key});
 
   @override
-  List<Bind<Object>> get binds => [
-    Bind<SettingsBloc>((i) => SettingsBloc())
-  ];
+  void binds(i) {
+    i.add<SettingsBloc>((i) => SettingsBloc());
+  }
 
   @override
   Widget get view => const SettingsScreen();

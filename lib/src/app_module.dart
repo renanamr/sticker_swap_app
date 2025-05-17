@@ -15,58 +15,38 @@ import 'modules/recover/presenter/recover_module.dart';
 import 'modules/register/presenter/register_bloc.dart';
 import 'modules/register/presenter/register_module.dart';
 
-class AppModule extends Module{
+class AppModule extends Module {
   @override
-  List<Bind> get binds => [
-    Bind<Dio>((i)=>Dio()),
-    Bind<Auth>((i)=>Auth()),
-    Bind<AlbumManager>((i) => AlbumManager()),
-    Bind<User>((i)=>User(
-      id: 0,
-      name: "Nome de teste",
-      image: "https://pbs.twimg.com/profile_images/1480660529840492546/nTVLSngG_400x400.jpg",
-      email: "tirarDepois@ufrn.edu.br"
-    )),
+  void binds(i) {
+    i.add<Dio>((i) => Dio());
+    i.add<Auth>((i) => Auth());
+    i.add<AlbumManager>((i) => AlbumManager());
+    i.add<User>((i) => User(
+        id: 0,
+        name: "Nome de teste",
+        image:
+            "https://pbs.twimg.com/profile_images/1480660529840492546/nTVLSngG_400x400.jpg",
+        email: "tirarDepois@ufrn.edu.br"));
 
-    Bind<SplashScreenBloc>((i) => SplashScreenBloc()),
-    Bind<LoginBloc>((i) => LoginBloc()),
-    Bind<RegisterBloc>((i) => RegisterBloc()),
-
-  ];
+    i.add<SplashScreenBloc>((i) => SplashScreenBloc());
+    i.add<LoginBloc>((i) => LoginBloc());
+    i.add<RegisterBloc>((i) => RegisterBloc());
+  }
 
   @override
-  List<ModularRoute> get routes =>[
-    ChildRoute('/', child: (context, args) => const SplashScreen()),
-    ModuleRoute(
-        '/login',
-        module: LoginModule(),
-        transition: TransitionType.fadeIn
-    ),
-    ModuleRoute(
-        '/home',
-        module: HomeModule(),
-        transition: TransitionType.fadeIn
-    ),
-    ModuleRoute(
-        '/message_chat',
-        module: MessageChatModule(),
-        transition: TransitionType.fadeIn
-    ),
-    ModuleRoute(
-        '/register',
-        module: RegisterModule(),
-        transition: TransitionType.fadeIn
-    ),
-    ModuleRoute(
-        '/recover',
-        module: RecoverModule(),
-        transition: TransitionType.fadeIn
-    ),
-     ModuleRoute(
-        '/qrcode',
-        module: QRCodeModule(),
-        transition: TransitionType.fadeIn
-    ),
-  ];
-
+  void routes(r) {
+    r.child('/', child: (context) => const SplashScreen());
+    r.module('/login',
+        module: LoginModule(), transition: TransitionType.fadeIn);
+    r.module('/home',
+        module: HomeModule(), transition: TransitionType.fadeIn);
+    r.module('/message_chat',
+        module: MessageChatModule(), transition: TransitionType.fadeIn);
+    r.module('/register',
+        module: RegisterModule(), transition: TransitionType.fadeIn);
+    r.module('/recover',
+        module: RecoverModule(), transition: TransitionType.fadeIn);
+    r.module('/qrcode',
+        module: QRCodeModule(), transition: TransitionType.fadeIn);
+  }
 }

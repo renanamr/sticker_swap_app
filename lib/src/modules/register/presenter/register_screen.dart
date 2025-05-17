@@ -10,11 +10,13 @@ class RegisterScreen extends StatefulWidget {
   RegisterScreenState createState() => RegisterScreenState();
 }
 
-class RegisterScreenState extends ModularState<RegisterScreen, RegisterBloc> {
+class RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _password_confirm = TextEditingController();
   bool _validate = true;
+
+  final controller = Modular.get<RegisterBloc>();
 
   @override
   Widget build(BuildContext context) {

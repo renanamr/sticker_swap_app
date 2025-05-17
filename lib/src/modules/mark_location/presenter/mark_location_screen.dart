@@ -5,12 +5,15 @@ import 'package:sticker_swap_app/src/modules/mark_location/presenter/mark_locati
 import 'package:sticker_swap_app/src/modules/mark_location/presenter/widgets/input_mark_location.dart';
 
 class MarkLocationScreen extends StatefulWidget {
+  const MarkLocationScreen({super.key});
+
   @override
   _MarkLocationScreenState createState() => _MarkLocationScreenState();
 }
 
-class _MarkLocationScreenState extends ModularState<MarkLocationScreen, MarkLocationBloc> {
+class _MarkLocationScreenState extends State<MarkLocationScreen> {
 
+  final controller = Modular.get<MarkLocationBloc>();
 
   @override
   void dispose() {

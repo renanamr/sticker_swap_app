@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:sticker_swap_app/src/core/entities/user.dart';
 
 class QrCodeScreen extends StatefulWidget {
-  const QrCodeScreen({Key? key}) : super(key: key);
+  const QrCodeScreen({super.key});
 
   @override
   State<QrCodeScreen> createState() => _QrCodeScreenState();
@@ -18,11 +15,11 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
         appBar: AppBar(
           title: const Text('QrCode chat'),
         ),
-        body: Column(
+        body: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            const Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(30, 20, 30, 60),
                 child: Text(
                   textAlign: TextAlign.center,
@@ -33,11 +30,6 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
                     fontSize: 16,
                   ),
                 ),
-            ),
-            QrImage(
-              data: "${Modular.get<User>().id}",
-              version: QrVersions.auto,
-              size: 200.0,
             ),
           ],
         ));

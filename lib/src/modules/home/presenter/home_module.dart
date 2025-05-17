@@ -5,13 +5,13 @@ import 'package:sticker_swap_app/src/modules/home/presenter/home_screen.dart';
 
 class HomeModule extends Module{
   @override
-  List<Bind> get binds => [
-    Bind<Filter>((i)=> Filter()),
-    Bind<HomeBloc>((i) => HomeBloc()),
-  ];
+  void binds(i) {
+    i.add<Filter>(Filter.new);
+    i.add<HomeBloc>(HomeBloc.new);
+  }
 
   @override
-  List<ModularRoute> get routes =>[
-    ChildRoute('/', child: (context, args) => const HomeScreen()),
-  ];
+  void routes(r) {
+    r.child('/', child: (context) => const HomeScreen());
+  }
 }

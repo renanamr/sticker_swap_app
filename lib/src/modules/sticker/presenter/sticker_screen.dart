@@ -16,17 +16,18 @@ import 'package:sticker_swap_app/src/utils/const/group_sticker_utils.dart';
 class StickerScreen extends StatefulWidget {
 
   final int idModePage;
-  const StickerScreen({Key? key, required this.idModePage})
-      : super(key: key);
+  const StickerScreen({super.key, required this.idModePage});
 
   @override
   State<StickerScreen> createState() => _StickerScreenState();
 }
 
-class _StickerScreenState extends ModularState<StickerScreen, StickerBloc> {
+class _StickerScreenState extends State<StickerScreen> {
   Auth auth = Modular.get<Auth>();
   User user = Modular.get<User>();
-  
+
+  final controller = Modular.get<StickerBloc>();
+
   @override
   void initState() {
     controller.getAlbum(user, auth);
@@ -71,7 +72,7 @@ class _StickerScreenState extends ModularState<StickerScreen, StickerBloc> {
 
           StreamBuilder(
               initialData: widget.idModePage,
-              stream: bloc.getIdModePage,
+              stream: controller.getIdModePage,
               builder: (_, snapshot) {
                 if(snapshot.data == 0) {
                   return _listGroupsSticker();

@@ -14,12 +14,14 @@ class Login extends StatefulWidget {
   LoginState createState() => LoginState();
 }
 
-class LoginState extends ModularState<Login, LoginBloc> {
+class LoginState extends State<Login> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   bool _validate = true;
   User user = Modular.get<User>();
   Auth auth = Modular.get<Auth>();
+
+  final controller = Modular.get<LoginBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +118,7 @@ class LoginState extends ModularState<Login, LoginBloc> {
 
 class RandomNumber extends StatefulWidget {
 
-  RandomNumber({this.token});
+  RandomNumber({super.key, this.token});
 
   String? token = "";
 

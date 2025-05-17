@@ -3,10 +3,10 @@ import 'package:sticker_swap_app/src/modules/login/presenter/login_screen.dart';
 
 class LoginModule extends Module{
   @override
-  List<Bind> get binds => [];
+  void binds(i) {}
 
   @override
-  List<ModularRoute> get routes =>[
-    ChildRoute('/', child: (context, args) => Login()),
-  ];
+  void routes(r) {
+    r.child('/', child: (context) => const Login());
+  }
 }
