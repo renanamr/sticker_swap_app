@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sticker_swap_app/src/modules/login/config/api.dart';
 import 'package:sticker_swap_app/src/modules/login/presenter/login_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -67,54 +66,4 @@ class RecoverScreenState extends State<RecoverScreen> {
 
   }
 
-}
-
-
-class RandomNumber extends StatefulWidget {
-
-  RandomNumber({this.token});
-
-  String? token = "";
-
-  @override
-  RandomNumberState createState() => RandomNumberState();
-}
-
-
-
-class RandomNumberState extends State<RandomNumber>{
-
-  final TextEditingController _randomNumber = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Logado!'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              width: 500,
-              height: 500,
-              child: TextField(
-                  decoration: InputDecoration(border: InputBorder.none),
-                  controller: _randomNumber,
-                  readOnly: true
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                _randomNumber.text = (await getRandomNumber(widget.token))!;
-              },
-              child: const Text('Get!'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

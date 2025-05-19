@@ -8,7 +8,7 @@ class SettingsModule extends WidgetModule{
 
   @override
   void binds(i) {
-    i.add<SettingsBloc>((i) => SettingsBloc());
+    i.add<SettingsBloc>(SettingsBloc.new);
   }
 
   @override

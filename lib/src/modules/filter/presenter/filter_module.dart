@@ -12,5 +12,5 @@ class FilterModule extends WidgetModule{
   }
 
   @override
-  Widget get view => FilterScreen();
+  Widget get view => const FilterScreen();
 }

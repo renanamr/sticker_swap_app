@@ -1,42 +1,40 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/dio.dart';
+import 'package:sticker_swap_app/src/core/entities/auth.dart';
+import 'package:sticker_swap_app/src/core/entities/user.dart';
+import 'package:sticker_swap_app/src/modules/login/domain/usecases/login.dart';
 
-class LoginBloc{
-  void verifyAuth()=> Modular.to.pushReplacementNamed("/home/");
-  void toRegisterScreen()=> Modular.to.pushNamed("/register/");
-  void toRecoverScreen()=> Modular.to.pushNamed("/recover/");
+class LoginBloc {
 
-  Future<Map?> login(email, password) async{
-    Dio dio = new Dio();
-    var response = await dio.post(dotenv.env['API_URI']! + '/api/login', data: {'email': email, 'password': password});
-    debugPrint(dotenv.env['API_URI']);
-    if(response.statusCode == 201){
-      var decodedResponse = response.data as Map;
-      //debugPrint(decodedResponse['token']);
-      return decodedResponse;
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  bool validate = true;
+
+  final user = Modular.get<User>();
+  final auth = Modular.get<Auth>();
+
+  final loginUseCase = Modular.get<ILogin>();
+
+
+  void verifyAuth() => Modular.to.pushReplacementNamed("/home/");
+
+  void toRegisterScreen() => Modular.to.pushNamed("/register/");
+
+  void toRecoverScreen() => Modular.to.pushNamed("/recover/");
+
+  Future<void> login() async {
+    var response = await loginUseCase(email.text, password.text);
+    if (!validate || response?['token'] == null) {
+      return;
     }
-
-    return null;
+    auth.token = response!['token'];
+    user.id = response['id'];
+    verifyAuth();
   }
 
-  Future<String?> getRandomNumber(token) async{
-    Dio dio = new Dio();
-    dio.options.headers['Content-Type'] = 'application/json';
-    dio.options.headers['Accept'] = 'application/json';
-    dio.options.headers['Authorization'] = 'Bearer $token';
-
-    var response = await dio.get(dotenv.env['API_URI']! + 'api/randomnumber');
-    //debugPrint(dotenv.env['API_URI']);
-
-    if(response.statusCode == 200){
-      var decodedResponse = response.data as Map;
-      return decodedResponse['randomNumber'];
-    }
-
-    return null;
+  void dispose() {
+    email.dispose();
+    password.dispose();
   }
+
 }

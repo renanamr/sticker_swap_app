@@ -12,7 +12,7 @@ class MarkLocationModule extends WidgetModule{
 
   @override
   void binds(i) {
-    i.add<MarkLocationBloc>((i) => MarkLocationBloc(markLocation: markLocation));
+    i.add<MarkLocationBloc>(() => MarkLocationBloc(markLocation: markLocation));
   }
 
   @override

@@ -11,7 +11,7 @@ class StickerModule extends WidgetModule{
 
   @override
   void binds(i) {
-    i.add<StickerBloc>((i) => StickerBloc());
+    i.add<StickerBloc>(StickerBloc.new);
 
     i.add<IGetAlbum>(GetAlbumImpl.new);
   }

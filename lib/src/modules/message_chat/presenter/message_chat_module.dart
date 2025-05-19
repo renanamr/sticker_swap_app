@@ -6,9 +6,9 @@ import 'package:sticker_swap_app/src/modules/message_chat/presenter/message_chat
 class MessageChatModule extends Module{
   @override
   void binds(i) {
-    i.add<MessageChatBloc>((i)=> MessageChatBloc());
+    i.add<MessageChatBloc>(MessageChatBloc.new);
 
-    i.add<IGetMessages>((i)=> GetMessagesImpl());
+    i.add<IGetMessages>(GetMessagesImpl.new);
   }
 
   @override

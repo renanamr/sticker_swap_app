@@ -18,19 +18,17 @@ import 'modules/register/presenter/register_module.dart';
 class AppModule extends Module {
   @override
   void binds(i) {
-    i.add<Dio>((i) => Dio());
-    i.add<Auth>((i) => Auth());
-    i.add<AlbumManager>((i) => AlbumManager());
-    i.add<User>((i) => User(
+    i.add<Dio>(() => Dio());
+    i.add<Auth>(Auth.new);
+    i.add<AlbumManager>(AlbumManager.new);
+    i.add<User>(() => User(
         id: 0,
         name: "Nome de teste",
         image:
             "https://pbs.twimg.com/profile_images/1480660529840492546/nTVLSngG_400x400.jpg",
         email: "tirarDepois@ufrn.edu.br"));
 
-    i.add<SplashScreenBloc>((i) => SplashScreenBloc());
-    i.add<LoginBloc>((i) => LoginBloc());
-    i.add<RegisterBloc>((i) => RegisterBloc());
+    i.add<SplashScreenBloc>(SplashScreenBloc.new);
   }
 
   @override
