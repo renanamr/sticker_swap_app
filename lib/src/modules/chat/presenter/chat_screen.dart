@@ -71,24 +71,28 @@ class _ChatScreenState extends State<ChatScreen> {
           icon: Icons.add,
           activeIcon: Icons.close,
           tooltip: "Adicionar chat",
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Theme.of(context).primaryColor,
           overlayColor: Colors.black,
           overlayOpacity: 0.3,
           children: [
             SpeedDialChild(
               label: 'Escanear',
-              child: Icon(Icons.qr_code_scanner),
-              labelStyle: TextStyle(fontSize: 18.0),
+              child: const Icon(Icons.qr_code_scanner),
+              labelStyle: const TextStyle(fontSize: 18.0),
               onTap: controller.openScanQrCode,
             ),
             SpeedDialChild(
                 label: 'QrCode', 
-                child: Icon(Icons.qr_code),
-                labelStyle: TextStyle(fontSize: 18.0),
-                onTap: () async {
-                 Navigator.pushNamed(context, '/qrcode');
-              },
+                child: const Icon(Icons.qr_code),
+                labelStyle: const TextStyle(fontSize: 18.0),
+                onTap: controller.openQrCode,
+            ),
+            SpeedDialChild(
+              label: 'Buscar',
+              child: const Icon(Icons.search),
+              labelStyle: const TextStyle(fontSize: 18.0),
+              onTap: controller.searchUser,
             ),
           ],
         ),

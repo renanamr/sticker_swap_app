@@ -7,6 +7,7 @@ import 'package:sticker_swap_app/src/modules/chat/qrcode/presenter/qrcode_module
 import 'package:sticker_swap_app/src/modules/home/presenter/home_module.dart';
 import 'package:sticker_swap_app/src/modules/login/presenter/login_module.dart';
 import 'package:sticker_swap_app/src/modules/message_chat/presenter/message_chat_module.dart';
+import 'package:sticker_swap_app/src/modules/search_user_chat/presenter/search_user_chat_module.dart';
 import 'package:sticker_swap_app/src/modules/splashscreen/presenter/splash_screen.dart';
 import 'package:sticker_swap_app/src/modules/splashscreen/presenter/splash_screen_bloc.dart';
 import 'package:sticker_swap_app/src/modules/login/presenter/login_bloc.dart';
@@ -46,5 +47,7 @@ class AppModule extends Module {
         module: RecoverModule(), transition: TransitionType.fadeIn);
     r.module('/qrcode',
         module: QRCodeModule(), transition: TransitionType.fadeIn);
+    r.module('/search_user',
+        module: SearchUserChatModule(), transition: TransitionType.fadeIn);
   }
 }

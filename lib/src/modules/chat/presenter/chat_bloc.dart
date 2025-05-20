@@ -26,9 +26,11 @@ class ChatBloc{
     Modular.to.pushNamed("/message_chat", arguments: chat);
   }
 
-  void openQrCode(){}
+  void openQrCode()=> Modular.to.pushNamed('/qrcode/');
 
-  void openScanQrCode(){}
+  void openScanQrCode(){
+    //TODO: Realizar Scann
+  }
 
   void onSearch(){
     List<Chat> chatsSearch =  [];
@@ -40,6 +42,9 @@ class ChatBloc{
 
     _chatsStream.sink.add(chatsSearch);
   }
+
+  void searchUser()=> Modular.to.pushNamed('/search_user/', arguments: chats)
+      .whenComplete(() => _chatsStream.sink.add(chats));
 
 
   void dispose(){

@@ -21,9 +21,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Log in'),
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView (
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
