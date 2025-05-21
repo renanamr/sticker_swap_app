@@ -11,15 +11,17 @@ import 'package:sticker_swap_app/src/modules/sticker/presenter/sticker_module.da
 import '../../../core/entities/auth.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ModularState<HomeScreen, HomeBloc> {
+class _HomeScreenState extends State<HomeScreen> {
   Auth auth = Modular.get<Auth>();
   User user = Modular.get<User>();
+
+  final controller = Modular.get<HomeBloc>();
 
   @override
   void dispose() {
@@ -29,7 +31,6 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeBloc> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(auth.token);
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(statusBarColor: Color(0xff9A1032)),
         child: StreamBuilder<int>(
@@ -40,13 +41,12 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeBloc> {
                 body: SafeArea(
                   child: Column(
                     children: [
-                      //Colocar depois demais itens do menu
                       if(snapshot.data == 0 || snapshot.data == 1)
                         StickerModule(idModePage: snapshot.data!,),
                       if(snapshot.data == 2)
-                        ChatModule(),
+                        const ChatModule(),
                       if(snapshot.data == 3)
-                        SettingsModule(),
+                        const SettingsModule(),
                     ],
                   ),
                 ),

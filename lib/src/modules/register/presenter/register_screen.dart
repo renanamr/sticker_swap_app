@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sticker_swap_app/src/modules/login/config/api.dart';
 import 'package:sticker_swap_app/src/modules/register/presenter/register_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,11 +9,13 @@ class RegisterScreen extends StatefulWidget {
   RegisterScreenState createState() => RegisterScreenState();
 }
 
-class RegisterScreenState extends ModularState<RegisterScreen, RegisterBloc> {
+class RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _password_confirm = TextEditingController();
   bool _validate = true;
+
+  final controller = Modular.get<RegisterBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -99,56 +100,6 @@ class RegisterScreenState extends ModularState<RegisterScreen, RegisterBloc> {
           ],
         )
       )
-    );
-  }
-}
-
-
-class RandomNumber extends StatefulWidget {
-
-  RandomNumber({this.token});
-
-  String? token = "";
-
-  @override
-  RandomNumberState createState() => RandomNumberState();
-}
-
-
-
-class RandomNumberState extends State<RandomNumber>{
-
-  final TextEditingController _randomNumber = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Logado!'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              width: 500,
-              height: 500,
-              child: TextField(
-                  decoration: const InputDecoration(border: InputBorder.none),
-                  controller: _randomNumber,
-                  readOnly: true
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                _randomNumber.text = (await getRandomNumber(widget.token))!;
-              },
-              child: const Text('Get!'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

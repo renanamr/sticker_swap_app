@@ -9,8 +9,8 @@ class ChatTile extends StatelessWidget {
   const ChatTile({
     required this.chat,
     required this.onTap,
-    Key? key
-  }) : super(key: key);
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ChatTile extends StatelessWidget {
       onTap: ()=> onTap(chat),
 
       child: Ink(
-        padding: EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
+        padding: const EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -35,10 +35,10 @@ class ChatTile extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(chat.name, style: TextStyle(fontSize: 16),),
+                          Text(chat.name, style: const TextStyle(fontSize: 16),),
                           const SizedBox(height: 6,),
                           Text(
-                            chat.lastMessage.message,
+                            chat.lastMessage?.message ?? "",
                             style: TextStyle(fontSize: 13,color: Colors.grey.shade600, fontWeight: FontWeight.normal),
                           ),
                         ],

@@ -5,14 +5,15 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/modules/splashscreen/presenter/splash_screen_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends ModularState<SplashScreen, SplashScreenBloc> {
+class _SplashScreenState extends State<SplashScreen> {
 
+  final controller = Modular.get<SplashScreenBloc>();
 
   @override
   void initState() {

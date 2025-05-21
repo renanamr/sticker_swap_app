@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sticker_swap_app/src/config/widget_module_config.dart';
 import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/get_album.dart';
 import 'package:sticker_swap_app/src/modules/sticker/presenter/sticker_bloc.dart';
 import 'package:sticker_swap_app/src/modules/sticker/presenter/sticker_screen.dart';
@@ -10,11 +10,11 @@ class StickerModule extends WidgetModule{
   StickerModule({super.key, required this.idModePage});
 
   @override
-  List<Bind<Object>> get binds => [
-    Bind<StickerBloc>((i)=> StickerBloc()),
+  void binds(i) {
+    i.add<StickerBloc>(StickerBloc.new);
 
-    Bind<IGetAlbum>((i)=> GetAlbumImpl()),
-  ];
+    i.add<IGetAlbum>(GetAlbumImpl.new);
+  }
 
   @override
   Widget get view => StickerScreen(idModePage: idModePage,);

@@ -4,7 +4,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sticker_swap_app/src/core/entities/user.dart';
 
 class QrCodeScreen extends StatefulWidget {
-  const QrCodeScreen({Key? key}) : super(key: key);
+  const QrCodeScreen({super.key});
 
   @override
   State<QrCodeScreen> createState() => _QrCodeScreenState();
@@ -22,22 +22,23 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.fromLTRB(30, 20, 30, 60),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  'Leia o QR Code para iniciar o chat com este usuário.',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
-            ),
-            QrImage(
+            QrImageView(
               data: "${Modular.get<User>().id}",
               version: QrVersions.auto,
               size: 200.0,
+            ),
+
+            const Padding(
+              padding: EdgeInsets.all(30),
+              child: Text(
+                textAlign: TextAlign.center,
+                'Leia o QR Code para iniciar o chat com este usuário.',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ],
         ));
