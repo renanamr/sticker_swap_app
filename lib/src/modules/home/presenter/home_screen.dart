@@ -31,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(auth.token);
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(statusBarColor: Color(0xff9A1032)),
         child: StreamBuilder<int>(
@@ -42,13 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 body: SafeArea(
                   child: Column(
                     children: [
-                      //Colocar depois demais itens do menu
                       if(snapshot.data == 0 || snapshot.data == 1)
                         StickerModule(idModePage: snapshot.data!,),
                       if(snapshot.data == 2)
-                        ChatModule(),
+                        const ChatModule(),
                       if(snapshot.data == 3)
-                        SettingsModule(),
+                        const SettingsModule(),
                     ],
                   ),
                 ),
