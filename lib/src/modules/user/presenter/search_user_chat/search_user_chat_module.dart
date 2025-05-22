@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/usecases/create_chat.dart';
-import 'package:sticker_swap_app/src/modules/search_user_chat/domain/usecases/get_users_by_username.dart';
-import 'package:sticker_swap_app/src/modules/search_user_chat/presenter/search_user_chat_bloc.dart';
-import 'package:sticker_swap_app/src/modules/search_user_chat/presenter/search_user_chat_screen.dart';
+import 'package:sticker_swap_app/src/modules/user/domain/usecases/get_users_by_username.dart';
+import 'package:sticker_swap_app/src/modules/user/presenter/search_user_chat/search_user_chat_bloc.dart';
+import 'package:sticker_swap_app/src/modules/user/presenter/search_user_chat/search_user_chat_screen.dart';
 
 class SearchUserChatModule extends Module{
   @override

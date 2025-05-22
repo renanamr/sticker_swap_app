@@ -7,13 +7,11 @@ import 'package:sticker_swap_app/src/modules/chat/qrcode/presenter/qrcode_module
 import 'package:sticker_swap_app/src/modules/home/presenter/home_module.dart';
 import 'package:sticker_swap_app/src/modules/login/presenter/login_module.dart';
 import 'package:sticker_swap_app/src/modules/message_chat/presenter/message_chat_module.dart';
-import 'package:sticker_swap_app/src/modules/search_user_chat/presenter/search_user_chat_module.dart';
 import 'package:sticker_swap_app/src/modules/splashscreen/presenter/splash_screen.dart';
 import 'package:sticker_swap_app/src/modules/splashscreen/presenter/splash_screen_bloc.dart';
-import 'package:sticker_swap_app/src/modules/login/presenter/login_bloc.dart';
+import 'package:sticker_swap_app/src/modules/user/presenter/search_user_chat/search_user_chat_module.dart';
 
 import 'modules/recover/presenter/recover_module.dart';
-import 'modules/register/presenter/register_bloc.dart';
 import 'modules/register/presenter/register_module.dart';
 
 class AppModule extends Module {
