@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/core/entities/auth.dart';
-import 'package:sticker_swap_app/src/core/entities/user.dart';
 import 'package:sticker_swap_app/src/modules/login/domain/usecases/login.dart';
 
 class LoginBloc {
@@ -10,13 +9,12 @@ class LoginBloc {
   final TextEditingController password = TextEditingController();
   bool validate = true;
 
-  final user = Modular.get<User>();
   final auth = Modular.get<Auth>();
 
   final loginUseCase = Modular.get<ILogin>();
 
 
-  void verifyAuth() => Modular.to.pushReplacementNamed("/home/");
+  void toSyncUserData() => Modular.to.pushReplacementNamed("/sync_user/");
 
   void toRegisterScreen() => Modular.to.pushNamed("/register/");
 
@@ -28,8 +26,7 @@ class LoginBloc {
       return;
     }
     auth.token = response!['token'];
-    user.id = response['id'];
-    verifyAuth();
+    toSyncUserData();
   }
 
   void dispose() {

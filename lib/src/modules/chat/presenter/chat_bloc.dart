@@ -47,10 +47,7 @@ class ChatBloc{
       //Verificar se informacao foi recebida
       if(result != "-1") _getUserByIDAndCreateChat(idUser: result);
     }catch(e){
-      alertMensagem(
-          titulo: 'Ops...',
-          descricao: "Não foi possível fazer a leitura"
-      );
+      alertMessage("Ops... Não foi possível fazer a leitura");
     }
   }
 
@@ -78,13 +75,11 @@ class ChatBloc{
         chats.insert(0, newChat);
         _chatsStream.sink.add(chats);
 
-        alertMensagem(
-            titulo: "Chat criado",
-            descricao: "O chat foi adicionado a sua lista.");
+        alertMessage("O chat foi adicionado a sua lista.");
       }
 
     }catch(e){
-      alertMensagem(titulo: "Ops...", descricao: "Não foi possível criar o chat.");
+      alertMessage("Ops... Não foi possível criar o chat.");
     }
   }
 

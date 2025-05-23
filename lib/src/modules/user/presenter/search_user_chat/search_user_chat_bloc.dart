@@ -46,13 +46,11 @@ class SearchUserChatBloc{
       if(newChat != null) {
         _chats.insert(0, newChat);
         users.remove(otherUser);
-        alertMensagem(
-            titulo: "Chat criado",
-            descricao: "O chat foi adicionado a sua lista.");
+        alertMessage("O chat foi adicionado a sua lista.");
       }
 
     }catch(e){
-      alertMensagem(titulo: "Ops...", descricao: "Não foi possível criar o chat.");
+      alertMessage("Ops... Não foi possível criar o chat.");
     }
     _loadingStream.sink.add(false);
   }
