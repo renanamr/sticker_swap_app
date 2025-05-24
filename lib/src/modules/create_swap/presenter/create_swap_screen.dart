@@ -15,8 +15,8 @@ class _CreateSwapScreenState extends State<CreateSwapScreen> {
         AppBarBottomSheet("Figurinhas de troca", context),
         Container(
             width: 400,
-            padding: EdgeInsets.fromLTRB(15, 15, 0, 15),
-            margin: EdgeInsets.only(left: 30, right: 30),
+            padding: const EdgeInsets.fromLTRB(15, 15, 0, 15),
+            margin: const EdgeInsets.only(left: 30, right: 30),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
@@ -27,7 +27,7 @@ class _CreateSwapScreenState extends State<CreateSwapScreen> {
                   'assets/images/info_icon.png',
                   height: 25,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 25,
                 ),
                 const Text(
@@ -36,8 +36,8 @@ class _CreateSwapScreenState extends State<CreateSwapScreen> {
                 )
               ],
             )),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Text(
             "[FWC] Especiais",
             style: TextStyle(fontSize: 18),
@@ -84,8 +84,8 @@ class _CreateSwapScreenState extends State<CreateSwapScreen> {
             style: TextButton.styleFrom(
               padding:
                   const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
-              backgroundColor: Color.fromRGBO(154, 16, 50, 1),
-              side: BorderSide(color: Color(0xff9A1032)),
+              backgroundColor: const Color.fromRGBO(154, 16, 50, 1),
+              side: const BorderSide(color: Color(0xff9A1032)),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
             ),
@@ -123,7 +123,7 @@ class _cardButtonState extends State<cardButton> {
           style: TextButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
-              side: BorderSide(color: Colors.black),
+              side: const BorderSide(color: Colors.black),
               backgroundColor: _colorButton),
           onPressed: () {
             setState(() {
@@ -132,7 +132,7 @@ class _cardButtonState extends State<cardButton> {
                 _colorButton = Colors.transparent;
                 _colorText = Colors.black;
               } else {
-                _colorButton = Color.fromRGBO(154, 16, 50, 1);
+                _colorButton = const Color.fromRGBO(154, 16, 50, 1);
                 _colorText = Colors.white;
               }
             });

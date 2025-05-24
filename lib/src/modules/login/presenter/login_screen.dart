@@ -17,13 +17,13 @@ class LoginScreenState extends State<LoginScreen> {
     controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView (
-        child: Column(
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+            child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
@@ -41,8 +41,8 @@ class LoginScreenState extends State<LoginScreen> {
                     labelText: 'Email',
                     prefixIcon: const Icon(Icons.email),
                     hintText: 'email@example.com',
-                    errorText: !controller.validate ? "Formato inválido" : null
-                ),
+                    errorText:
+                        !controller.validate ? "Formato inválido" : null),
               ),
             ),
             Container(
@@ -51,54 +51,73 @@ class LoginScreenState extends State<LoginScreen> {
                 controller: controller.password,
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(90.0),
-                    ),
-                    labelText: 'Password',
-                    prefixIcon: const Icon(Icons.key),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(90.0),
+                  ),
+                  labelText: 'Password',
+                  prefixIcon: const Icon(Icons.key),
                 ),
               ),
             ),
             Container(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-              child: TextButton(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                child: TextButton(
                   onPressed: controller.toRecoverScreen,
                   child: const Text(
                     'Esqueceu a senha?',
                     style: TextStyle(color: Color.fromARGB(255, 31, 114, 240)),
                   ),
                 ),
-            ),
-            ),
-            Container(
-                height: 80,
-                padding: const EdgeInsets.all(20),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                  ),
-                  child: const Text('Log In'),
-                  onPressed: () async{
-                    setState(() {
-                      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.email.text)
-                          ? controller.validate = true
-                          : controller.validate = false;
-                    });
-                    controller.login();
-                  },
-                )),
-            TextButton(
-              onPressed: controller.toRegisterScreen,
-              child: Text(
-                'Registre-se',
-                style: TextStyle(color: Colors.grey[600]),
               ),
             ),
+            StreamBuilder(
+              initialData: false,
+              stream: controller.isLoading,
+              builder: (context, snapshot) {
+                if (snapshot.data!) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return _buttonLogin;
+                }
+              },
+            ),
           ],
+        )));
+  }
+
+  Widget get _buttonLogin {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+            height: 80,
+            padding: const EdgeInsets.all(20),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+              ),
+              child: const Text('Login'),
+              onPressed: () async {
+                setState(() {
+                  controller.validate = RegExp(
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(controller.email.text);
+                });
+                if (controller.validate) controller.login();
+              },
+            )),
+        TextButton(
+          onPressed: controller.toRegisterScreen,
+          child: Text(
+            'Registre-se',
+            style: TextStyle(color: Colors.grey[600]),
+          ),
         )
-      )
+      ],
     );
   }
 }
