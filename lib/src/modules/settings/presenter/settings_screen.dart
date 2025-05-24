@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
+import 'package:sticker_swap_app/src/modules/settings/presenter/settings_bloc.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+
+  final controller = Modular.get<SettingsBloc>();
 
   @override
   void initState() {
+    controller.setUserData();
     super.initState();
-    _email = TextEditingController(text: 'enne@gmail.com');
-    _password = TextEditingController(text: '****************');
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -25,7 +31,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Expanded(
         child: Scaffold(
             appBar: AppBar(
-              title: Text('Configurações'),
+              title: const Text('Configurações'),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -52,7 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     child: TextField(
-                      controller: _email,
+                      controller: controller.email,
                       decoration: InputDecoration(
                         suffixIcon: const Icon(Icons.edit),
                         border: OutlineInputBorder(
@@ -65,7 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     child: TextField(
-                      controller: _password,
+                      controller: controller.password,
                       decoration: InputDecoration(
                         suffixIcon: const Icon(Icons.remove_red_eye),
                         border: OutlineInputBorder(
@@ -83,10 +89,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                       ),
+                      onPressed: controller.exitApp,
                       child: const Text('Sair'),
-                      onPressed: () async {
-                        alertMessage("Você tem certeza que deseja sair do Sticker Swap?", onPressed: (){Modular.to.pushReplacementNamed("/login/");}, buttonText: "Sim");
-                      },
                     )
                   ),
                 ],

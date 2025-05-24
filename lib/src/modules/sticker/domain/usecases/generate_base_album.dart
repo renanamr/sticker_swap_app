@@ -1,13 +1,8 @@
 import 'package:sticker_swap_app/src/core/entities/album.dart';
 import 'package:sticker_swap_app/src/modules/sticker/domain/entities/sticker.dart';
-import 'package:sticker_swap_app/src/modules/sticker/infra/models/sticker_model.dart';
-
-
 
 Album generateAlbum(){
     Album album = Album();
-
-    Map<int, List<StickerModel>> collectionStickers = Map<int, List<StickerModel>>();
 
     album.collectionStickers = {
       0 : [

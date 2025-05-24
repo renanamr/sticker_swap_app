@@ -10,18 +10,10 @@ class LoginBloc {
   bool validate = true;
 
   final auth = Modular.get<Auth>();
-
   final loginUseCase = Modular.get<ILogin>();
 
 
-  void toSyncUserData() => Modular.to.pushReplacementNamed("/sync_user/");
-
-  void toRegisterScreen() => Modular.to.pushNamed("/register/");
-
-  void toRecoverScreen() => Modular.to.pushNamed("/recover/");
-
   Future<void> login() async {
-    return toSyncUserData();
     var response = await loginUseCase(email.text, password.text);
     if (!validate || response?['token'] == null) {
       return;
@@ -29,6 +21,13 @@ class LoginBloc {
     auth.token = response!['token'];
     toSyncUserData();
   }
+
+  void toSyncUserData() => Modular.to.pushReplacementNamed("/sync_user/");
+
+  void toRegisterScreen() => Modular.to.pushNamed("/register/");
+
+  void toRecoverScreen() => Modular.to.pushNamed("/recover/");
+
 
   void dispose() {
     email.dispose();

@@ -3,6 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/modules/recover/presenter/recover_bloc.dart';
 
 class RecoverScreen extends StatefulWidget {
+  const RecoverScreen({super.key});
+
   @override
   RecoverScreenState createState() => RecoverScreenState();
 }
@@ -53,12 +55,8 @@ class RecoverScreenState extends State<RecoverScreen> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
                   ),
+                  onPressed: controller.sendEmail,
                   child: const Text('Continuar'),
-                  onPressed: () async{
-                    setState(() {
-                      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email.text) ? _validate = true: _validate = false;
-                    });
-                  },
                 )),
           ],
         ));
