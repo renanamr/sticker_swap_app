@@ -1,49 +1,53 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
+import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
 import 'package:sticker_swap_app/src/core/entities/album.dart';
+import 'package:sticker_swap_app/src/modules/register/domain/entities/register.dart';
+import 'package:sticker_swap_app/src/modules/register/domain/usecases/register_user.dart';
 import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/generate_base_album.dart';
 import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/get_album.dart';
 
 class RegisterBloc{
-  void verifyAuth()=> Modular.to.pushReplacementNamed("/login/");
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final passwordConfirm = TextEditingController();
 
-  Future<Map?> register(email, password) async{
-    Dio dio = new Dio();
-    var response = await dio.post(dotenv.env['API_URI']! + '/api/cadastro', data: {'email': email, 'password': password});
-    debugPrint(dotenv.env['API_URI']);
-    var decodedResponse = response.data as Map;
-    debugPrint(decodedResponse.toString());
-    if(response.statusCode == 201){
-      
-      return decodedResponse;
-    }
-    decodedResponse['status'] = response.statusCode;
-    return decodedResponse;
-  }
+  final registerUserUseCase = Modular.get<IRegisterUser>();
 
-  Future<String?> getRandomNumber(token) async{
-    Dio dio = new Dio();
-    dio.options.headers['Content-Type'] = 'application/json';
-    dio.options.headers['Accept'] = 'application/json';
-    dio.options.headers['Authorization'] = 'Bearer $token';
+  void toLoginPage()=> Modular.to.pushReplacementNamed("/login/");
 
-    var response = await dio.get(dotenv.env['API_URI']! + 'api/randomnumber');
-    //debugPrint(dotenv.env['API_URI']);
-
-    if(response.statusCode == 200){
-      var decodedResponse = response.data as Map;
-      return decodedResponse['randomNumber'];
+  Future<void> register() async{
+    if(passwordConfirm.text != password.text){
+      alertMessage("Não foi possivel realizar o cadastro. Senhas não são iguais!");
+      return;
     }
 
-    return null;
+    //TODO: Colocar nome real
+    final register = Register(
+      email: email.text,
+      password: password.text,
+      name: "Renan Alves",
+    );
+
+    final success = await registerUserUseCase(register);
+
+    if(success){
+      await alertMessage("Usuário cadastrado com sucesso!");
+      toLoginPage();
+    }else{
+      alertMessage("Ocorreu um erro inesperado ao realizar o cadastro, tente novamente mais tarde.");
+    }
   }
+
 
   void setUpAlbum(userId){
     Album novo = generateAlbum();
-    // debugPrint(novo.toJson().toString());
     postAlbum(userId, novo.toJson());
+  }
+
+  void dispose(){
+    email.dispose();
+    password.dispose();
+    passwordConfirm.dispose();
   }
 }

@@ -19,8 +19,8 @@ class AppModule extends Module {
   @override
   void binds(i) {
     i.add<Dio>(() => Dio());
-    i.add<Auth>(Auth.new);
-    i.add<AlbumManager>(AlbumManager.new);
+    i.addSingleton<Auth>(Auth.new);
+    i.addSingleton<AlbumManager>(AlbumManager.new);
     i.add<User>(() => User(
         id: 0,
         name: "Nome de teste",

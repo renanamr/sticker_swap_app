@@ -6,7 +6,7 @@ import 'package:sticker_swap_app/src/modules/home/presenter/home_screen.dart';
 class HomeModule extends Module{
   @override
   void binds(i) {
-    i.add<Filter>(Filter.new);
+    i.addSingleton<Filter>(()=> Filter());
     i.add<HomeBloc>(HomeBloc.new);
   }
 

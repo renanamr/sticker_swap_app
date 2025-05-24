@@ -10,12 +10,15 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
-  final TextEditingController _password_confirm = TextEditingController();
   bool _validate = true;
 
   final controller = Modular.get<RegisterBloc>();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class RegisterScreenState extends State<RegisterScreen> {
             Container(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextField(
-                controller: _email,
+                controller: controller.email,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(90.0),
@@ -49,7 +52,7 @@ class RegisterScreenState extends State<RegisterScreen> {
             Container(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextField(
-                controller: _password,
+                controller: controller.password,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -63,7 +66,7 @@ class RegisterScreenState extends State<RegisterScreen> {
             Container(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextField(
-                controller: _password_confirm,
+                controller: controller.passwordConfirm,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -84,17 +87,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                   child: const Text('Cadastre-se'),
                   onPressed: () async{
                     setState(() {
-                      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email.text) ? _validate = true: _validate = false;
+                      _validate = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.email.text);
                     });
 
-                    var response = await controller.register(_email.text, _password.text);
-                    if( response?['status'] != null){
-                      //response!['status']
-                      return;
-                    }
-                    //Navigator.push(context, MaterialPageRoute(builder: (context) => RandomNumber(token: jwt)));
-                    controller.setUpAlbum(response!['id']);
-                    controller.verifyAuth();
+                    if(_validate) controller.register();
                   },
                 )),
           ],

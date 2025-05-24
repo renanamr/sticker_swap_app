@@ -7,23 +7,23 @@ class ElementSticker extends StatelessWidget {
   final Function(Sticker) detailsSticker;
 
   const ElementSticker({
-    Key? key,
+    super.key,
     required this.sticker,
     required this.addSticker,
     required this.detailsSticker
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 65,
-      width: 90,
+      width: 104,
 
       child: Stack(
         alignment: Alignment.topRight,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
             child: Ink(
               width: 90,
               height: 45,

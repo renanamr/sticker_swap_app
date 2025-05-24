@@ -1,16 +1,55 @@
-# sticker_swap_app
+# Sticker Swap APP
 
-App de gerencimento de albúm de figurinhas da copa e rede social para trocas.
+Este projeto visa desenvolver um app capaz de gerenciar álbuns de figurinhas da copa. Para isso foi desenvolvido esse projeto para instalação no dispositivo e em conjunto uma API.
 
-## Getting Started
+## Funcionalidades
+- Gerenciamento de álbuns (Adição, remoção de figurinhas);
+- Filtragens (Somente repetidas, somente faltantes);
+- Organização de figurinhas por grupos/times;
+- Chat para troca de figurinhas;
+- Envio de mensagens (comuns, de troca ou localização para troca);
+- Sugestão de trocas (com base nas suas figurinhas e do outro usuário);
+- Compartilhamento de chat por QrCode.
 
-This project is a starting point for a Flutter application.
+## 🚀 Tecnologias
 
-A few resources to get you started if this is your first Flutter project:
+### No app:
+- Flutter 3.22+
+- Android Studio ou VS Code
+- .env (gerenciamento de ambiente)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Na API:
+- Consulte o projeto: https://github.com/guieg/Sticker-Swap-API/
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ⚙️ Configuração
+
+1. Baixe as dependências do projeto:
+
+```
+flutter pub get
+```
+
+2. Adicione a sua plataforma:
+
+```
+flutter create --platforms=ios,android . 
+```
+> Edite o comando acima para selecionar apenas as plataformas que você utiliza.
+
+2. Configure as váriaveis de ambiente, para isso crie um arquivo .env com:
+
+```
+API_URI="http://localhost:8081"
+```
+
+localhost:8081 é o endereço padrão de execução do sticker_swap_api
+
+### Execução
+
+Após configurar o app e inicializar a api, execute:
+
+```
+# flutter run -d <plataform>
+```
+
