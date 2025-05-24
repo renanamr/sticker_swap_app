@@ -68,7 +68,7 @@ class _MessageChatScreenState extends State<MessageChatScreen> {
                               message: snapshot.data![index] as MessageSwapStickers,
                               isMy: controller.isMyMessage(snapshot.data![index]),
                               availableSwap: controller.availableSwap,
-                              //editSwap: controller.editSwap,
+                              editSwap: controller.editSwap,
                               chat: widget.chat,
                             );
                           }

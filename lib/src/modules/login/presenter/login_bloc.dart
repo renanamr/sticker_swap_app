@@ -19,6 +19,8 @@ class LoginBloc {
 
   Future<void> login() async {
     try{
+      return toSyncUserData();
+
       _loadingStream.sink.add(true);
       final authLogin = await loginUseCase(email.text, password.text);
       auth.token = authLogin.token;

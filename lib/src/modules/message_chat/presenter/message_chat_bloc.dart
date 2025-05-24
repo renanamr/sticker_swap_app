@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:sticker_swap_app/src/core/entities/user.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/entities/chat.dart';
+import 'package:sticker_swap_app/src/modules/create_swap/domain/entities/reference_swap.dart';
 import 'package:sticker_swap_app/src/modules/create_swap/presenter/create_swap_module.dart';
 import 'package:sticker_swap_app/src/modules/mark_location/presenter/mark_location_module.dart';
 import 'package:sticker_swap_app/src/modules/message_chat/domain/entities/message.dart';
@@ -113,10 +114,11 @@ class MessageChatBloc{
         isScrollControlled: true,
         context: Modular.routerDelegate.navigatorKey.currentContext!,
         builder: (_) => CreateSwapModule(
-          //chat: chat,
-          //messageSwap: messageSwap,
-          //sendRefereceSwap: _sendRefereceSwap,
-        ));
+          chat: chat,
+          messageSwap: messageSwap,
+          sendReferenceSwap: _sendReferenceSwap,
+        )
+    );
   }
 
 
@@ -140,6 +142,31 @@ class MessageChatBloc{
       }
     });
   }
+
+  Future<void> _sendReferenceSwap(ReferenceSwap referenceSwap) async {
+    /*
+    TODO: Organizar a lógica
+    final message = MessageSwapStickers(
+      idSender: _user.id!,
+      stickersNeed: referenceSwap.stickersNeed,
+      stickersSender: referenceSwap.stickersSender,
+      status: StatusMessageConfirm.wait,
+      id: 0,
+    );
+
+    final success = await _postMessageUseCase(
+        message: message,
+        idChat: chat.id
+    );
+
+    if (success) {
+      messages.add(message);
+      _messagesStream.add(messages);
+    }
+
+     */
+  }
+
 
   ///Dispose dos componentes
   void dispose() {

@@ -9,11 +9,11 @@ class MessageLocalization extends StatelessWidget {
   final Function({required MessagePlace messagePlace, required int newStatus}) availableLocalization;
 
   const MessageLocalization({
-    Key? key,
+    super.key,
     required this.isMy,
     required this.message,
     required this.availableLocalization
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

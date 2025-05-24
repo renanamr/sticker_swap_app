@@ -4,12 +4,14 @@ class Chat{
   int id;
   String name;
   String image;
+  int? idUser;
   Message? lastMessage;
 
   Chat({
     required this.id,
     required this.name,
     required this.image,
-    this.lastMessage
+    this.lastMessage,
+    this.idUser,
   });
 }
