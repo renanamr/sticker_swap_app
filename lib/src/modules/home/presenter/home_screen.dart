@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sticker_swap_app/src/core/entities/user.dart';
 import 'package:sticker_swap_app/src/modules/chat/presenter/chat_module.dart';
 import 'package:sticker_swap_app/src/modules/home/presenter/home_bloc.dart';
 import 'package:sticker_swap_app/src/modules/home/presenter/widgets/home_bottom_navigator_bar.dart';
 import 'package:sticker_swap_app/src/modules/settings/presenter/settings_module.dart';
 import 'package:sticker_swap_app/src/modules/sticker/presenter/sticker_module.dart';
-
-import '../../../core/entities/auth.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,9 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Auth auth = Modular.get<Auth>();
-  User user = Modular.get<User>();
-
   final controller = Modular.get<HomeBloc>();
 
   @override

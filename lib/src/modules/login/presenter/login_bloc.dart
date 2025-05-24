@@ -5,8 +5,8 @@ import 'package:sticker_swap_app/src/modules/login/domain/usecases/login.dart';
 
 class LoginBloc {
 
-  final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
   bool validate = true;
 
   final auth = Modular.get<Auth>();

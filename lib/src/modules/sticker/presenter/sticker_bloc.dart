@@ -35,7 +35,7 @@ class StickerBloc{
 
 
   ///<!Casos de uso>
-  Future<void> getAlbum(user, auth) async{
+  Future<void> getAlbum() async{
     if(albumManager.albumView == null){
       Album album = await getAlbumUsecase(user: user, auth: auth);
       albumManager.setBaseAlbum(album);
@@ -66,13 +66,15 @@ class StickerBloc{
 
       if(albumManager.albumView!.collectionStickers.containsKey(i)){
         for(Sticker sticker in (albumManager.albumView!.collectionStickers[i] as List<Sticker>)) {
-          if(sticker.text.contains(searchController.text.toUpperCase()))
+          if(sticker.text.contains(searchController.text.toUpperCase())) {
             sticksGroup.add(sticker);
+          }
         }
       }
 
-      if(sticksGroup.isNotEmpty)
+      if(sticksGroup.isNotEmpty) {
         album.collectionStickers[i] = List.from(sticksGroup);
+      }
     }
 
     albumManager.albumView = album;
@@ -99,7 +101,7 @@ class StickerBloc{
         )),
         backgroundColor: Colors.white,
         context: Modular.routerDelegate.navigatorKey.currentContext!,
-        builder: (_) => FilterModule()
+        builder: (_) => const FilterModule()
     );
 
     _idModePageStream.sink.add(1);
@@ -110,10 +112,11 @@ class StickerBloc{
   void addSticker(Sticker sticker){
     sticker.quantity += 1;
 
-    if(sticker.quantity == 1)
+    if(sticker.quantity == 1) {
       albumManager.obtidas++;
-    else
+    } else {
       albumManager.repetidas++;
+    }
 
     putAlbum(user.id, albumManager.album.toJson(), auth.token);
     _idModePageStream.sink.add(1);
@@ -124,10 +127,11 @@ class StickerBloc{
   void removeSticker(Sticker sticker){
     sticker.quantity -= 1;
 
-    if(sticker.quantity == 0)
+    if(sticker.quantity == 0) {
       albumManager.obtidas--;
-    else
+    } else {
       albumManager.repetidas--;
+    }
 
     putAlbum(user.id, albumManager.album.toJson(), auth.token);
     _idModePageStream.sink.add(1);

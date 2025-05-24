@@ -3,7 +3,7 @@ import 'package:rxdart/subjects.dart';
 class HomeBloc{
 
   int indexTelaAtual = 0;
-  BehaviorSubject<int> _intexTelaStream = BehaviorSubject.seeded(0);
+  final BehaviorSubject<int> _intexTelaStream = BehaviorSubject.seeded(0);
 
   Stream<int> get getIndexTela => _intexTelaStream.stream;
 
