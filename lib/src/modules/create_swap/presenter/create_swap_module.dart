@@ -9,10 +9,10 @@ import 'package:sticker_swap_app/src/modules/message_chat/domain/entities/messag
 
 class CreateSwapModule extends WidgetModule {
 
-  Chat? chat;
-  MessageSwapStickers? messageSwap;
+  final Chat? chat;
+  final MessageSwapStickers? messageSwap;
   final Function(ReferenceSwap referenceSwap) sendReferenceSwap;
-  CreateSwapModule({
+  const CreateSwapModule({
     super.key,
     this.chat,
     this.messageSwap,
