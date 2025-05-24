@@ -5,7 +5,7 @@ import 'package:sticker_swap_app/src/modules/recover/presenter/recover_screen.da
 class RecoverModule extends Module{
   @override
   void binds(i) {
-    i.add<RecoverBloc>((i) => RecoverBloc());
+    i.add<RecoverBloc>(RecoverBloc.new);
   }
 
   @override

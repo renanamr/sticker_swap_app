@@ -7,13 +7,13 @@ import 'package:sticker_swap_app/src/core/entities/user.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/entities/chat.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/usecases/create_chat.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/usecases/get_chats.dart';
-import 'package:sticker_swap_app/src/modules/login/domain/usecases/get_user.dart';
+import 'package:sticker_swap_app/src/modules/user/domain/usecases/get_user_by_id.dart';
 
 class ChatBloc{
 
   final User _user = Modular.get<User>();
 
-  final _getUserUseCase = Modular.get<IGetUser>();
+  final _getUserUseCase = Modular.get<IGetUserByID>();
   final _getChatsUseCase = Modular.get<IGetChats>();
   final _createChatUseCase = Modular.get<ICreateChat>();
 

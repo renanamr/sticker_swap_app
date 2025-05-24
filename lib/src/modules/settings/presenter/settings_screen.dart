@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -84,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       child: const Text('Sair'),
                       onPressed: () async {
-                        alertMessage("Você tem certeza que deseja sair do Sticker Swap?");
+                        alertMessage("Você tem certeza que deseja sair do Sticker Swap?", onPressed: (){Modular.to.pushReplacementNamed("/login/");}, buttonText: "Sim");
                       },
                     )
                   ),

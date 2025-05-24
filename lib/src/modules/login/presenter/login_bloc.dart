@@ -21,6 +21,7 @@ class LoginBloc {
   void toRecoverScreen() => Modular.to.pushNamed("/recover/");
 
   Future<void> login() async {
+    return toSyncUserData();
     var response = await loginUseCase(email.text, password.text);
     if (!validate || response?['token'] == null) {
       return;

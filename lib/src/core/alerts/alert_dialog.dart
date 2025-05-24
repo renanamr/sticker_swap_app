@@ -31,23 +31,20 @@ Future<bool> alertConfirme({
   return confirm;
 }
 
-
-
-
-alertMessage(String description) {
-  showDialog(
+Future<void> alertMessage(String description,
+    {String buttonText = 'Ok', VoidCallback? onPressed}) async {
+  await showDialog(
       context: Modular.routerDelegate.navigatorKey.currentContext!,
       builder: (BuildContext context) {
         return AlertDialog(
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           content: Padding(
             padding: const EdgeInsets.only(top: 10),
             child: RichText(
               textAlign: TextAlign.justify,
               text: TextSpan(
-                  text:
-                  description,
+                  text: description,
                   style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
@@ -63,9 +60,13 @@ alertMessage(String description) {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
                   ),
-                  child: const Text('Sim'),
+                  child: Text(buttonText),
                   onPressed: () async {
-                    Navigator.pushNamed(context, '/login');
+                    if (onPressed != null) {
+                      onPressed();
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                 ))
           ],

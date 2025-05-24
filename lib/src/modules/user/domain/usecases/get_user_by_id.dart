@@ -1,11 +1,10 @@
 import 'package:sticker_swap_app/src/core/entities/user.dart';
 
-abstract class IGetUser{
+abstract class IGetUserByID{
   Future<User> call (String idUser);
 }
 
-class GetUserImpl implements IGetUser{
-
+class GetUserByIDImpl implements IGetUserByID{
 
   @override
   Future<User> call(String idUser) async{
