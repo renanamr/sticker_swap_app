@@ -5,7 +5,7 @@ import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
 import 'package:sticker_swap_app/src/core/entities/user.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/entities/chat.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/usecases/create_chat.dart';
-import 'package:sticker_swap_app/src/modules/search_user_chat/domain/usecases/get_users_by_username.dart';
+import 'package:sticker_swap_app/src/modules/user/domain/usecases/get_users_by_username.dart';
 
 class SearchUserChatBloc{
   final _user = Modular.get<User>();
@@ -46,13 +46,11 @@ class SearchUserChatBloc{
       if(newChat != null) {
         _chats.insert(0, newChat);
         users.remove(otherUser);
-        alertMensagem(
-            titulo: "Chat criado",
-            descricao: "O chat foi adicionado a sua lista.");
+        alertMessage("O chat foi adicionado a sua lista.");
       }
 
     }catch(e){
-      alertMensagem(titulo: "Ops...", descricao: "Não foi possível criar o chat.");
+      alertMessage("Ops... Não foi possível criar o chat.");
     }
     _loadingStream.sink.add(false);
   }

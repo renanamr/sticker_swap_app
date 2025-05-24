@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -83,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       child: const Text('Sair'),
                       onPressed: () async {
-                        _showLogOutModalDialog(context);
+                        alertMessage("Você tem certeza que deseja sair do Sticker Swap?", onPressed: (){Modular.to.pushReplacementNamed("/login/");}, buttonText: "Sim");
                       },
                     )
                   ),
@@ -91,42 +93,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             )));
   }
-}
-
-_showLogOutModalDialog(context) {
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              content: RichText(
-                textAlign: TextAlign.justify,
-                text: const TextSpan(
-                    text:
-                        "Você tem certeza que deseja sair do Sticker Swap?",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                        color: Colors.black,
-                        wordSpacing: 1)),
-              ),
-              actions: [
-                Container(
-                      height: 80,
-                      padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(50),
-                        ),
-                        child: const Text('Sim'),
-                        onPressed: () async {
-                          Navigator.pushNamed(context, '/login');
-                        },
-                      ))
-              ],
-        );
-      });
 }
 
 Widget buildProfileImage() => const CircleAvatar(

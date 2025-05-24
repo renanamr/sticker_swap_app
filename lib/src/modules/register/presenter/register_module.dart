@@ -5,7 +5,7 @@ import 'package:sticker_swap_app/src/modules/register/presenter/register_screen.
 class RegisterModule extends Module{
   @override
   void binds(i) {
-    i.add<RegisterBloc>((i) => RegisterBloc());
+    i.add<RegisterBloc>(RegisterBloc.new);
   }
 
   @override

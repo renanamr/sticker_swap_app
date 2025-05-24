@@ -7,13 +7,13 @@ import 'package:sticker_swap_app/src/core/entities/user.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/entities/chat.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/usecases/create_chat.dart';
 import 'package:sticker_swap_app/src/modules/chat/domain/usecases/get_chats.dart';
-import 'package:sticker_swap_app/src/modules/login/domain/usecases/get_user.dart';
+import 'package:sticker_swap_app/src/modules/user/domain/usecases/get_user_by_id.dart';
 
 class ChatBloc{
 
   final User _user = Modular.get<User>();
 
-  final _getUserUseCase = Modular.get<IGetUser>();
+  final _getUserUseCase = Modular.get<IGetUserByID>();
   final _getChatsUseCase = Modular.get<IGetChats>();
   final _createChatUseCase = Modular.get<ICreateChat>();
 
@@ -47,10 +47,7 @@ class ChatBloc{
       //Verificar se informacao foi recebida
       if(result != "-1") _getUserByIDAndCreateChat(idUser: result);
     }catch(e){
-      alertMensagem(
-          titulo: 'Ops...',
-          descricao: "Não foi possível fazer a leitura"
-      );
+      alertMessage("Ops... Não foi possível fazer a leitura");
     }
   }
 
@@ -78,13 +75,11 @@ class ChatBloc{
         chats.insert(0, newChat);
         _chatsStream.sink.add(chats);
 
-        alertMensagem(
-            titulo: "Chat criado",
-            descricao: "O chat foi adicionado a sua lista.");
+        alertMessage("O chat foi adicionado a sua lista.");
       }
 
     }catch(e){
-      alertMensagem(titulo: "Ops...", descricao: "Não foi possível criar o chat.");
+      alertMessage("Ops... Não foi possível criar o chat.");
     }
   }
 
