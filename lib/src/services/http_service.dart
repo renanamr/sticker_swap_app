@@ -15,12 +15,13 @@ class HttpService{
   Future<dynamic> get({
     required String endpoint,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? extraHeaders,
   }) async{
     try{
       return await _dio.get(
           "$_apiUrl$endpoint",
           queryParameters: queryParameters,
-          options: Options(headers: {'Authorization': 'bearer ${_auth.token}',})
+          options: Options(headers: _getHeaders(extraHeaders))
       );
 
     } on DioException catch(e){
@@ -35,12 +36,10 @@ class HttpService{
     Object? data,
     Map<String, dynamic>? extraHeaders,
   }) async{
-    final headers = {'Authorization': 'bearer ${_auth.token}',};
-
     return await _dio.post(
       "$_apiUrl$endpoint",
       data: data,
-      options: Options(headers: headers),
+      options: Options(headers: _getHeaders(extraHeaders))
     );
   }
 
@@ -51,17 +50,27 @@ class HttpService{
     Map<String, dynamic>? queryParameters
   }) async{
     try{
-      final headers = {'Authorization': 'bearer ${_auth.token}',};
-
       return await _dio.put(
           "$_apiUrl$endpoint",
           data: data,
           queryParameters: queryParameters,
-          options: Options(headers: headers)
+          options: Options(headers: _getHeaders(extraHeaders))
       );
     } catch(e){
       rethrow;
     }
+  }
+
+  /// Organiza Headers de autenticação dos usuários
+  Map<String, dynamic> _getHeaders(Map<String, dynamic>? extraHeaders){
+    Map<String, dynamic> headers = {};
+
+    if(_auth.token != null) {
+      headers.addAll({'Authorization': 'bearer ${_auth.token}'});
+    }
+
+    if (extraHeaders != null) headers.addAll(extraHeaders);
+    return headers;
   }
 
 }

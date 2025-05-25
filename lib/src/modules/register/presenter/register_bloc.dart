@@ -4,8 +4,8 @@ import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
 import 'package:sticker_swap_app/src/core/entities/album.dart';
 import 'package:sticker_swap_app/src/modules/register/domain/entities/register.dart';
 import 'package:sticker_swap_app/src/modules/register/domain/usecases/register_user.dart';
+import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/create_album.dart';
 import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/generate_base_album.dart';
-import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/get_album.dart';
 
 class RegisterBloc{
   final email = TextEditingController();
@@ -40,9 +40,10 @@ class RegisterBloc{
   }
 
 
-  void setUpAlbum(userId){
+  void setUpAlbum(userId) async {
     Album novo = generateAlbum();
-    postAlbum(userId, novo.toJson());
+    final createAlbumUseCase = CreateAlbumImpl();
+    await createAlbumUseCase(userId: userId, album: novo.toJson());
   }
 
   void dispose(){

@@ -9,7 +9,7 @@ import 'package:sticker_swap_app/src/modules/filter/presenter/filter_module.dart
 import 'package:sticker_swap_app/src/modules/sticker/domain/entities/sticker.dart';
 import 'package:sticker_swap_app/src/modules/sticker/domain/entities/sticker_group.dart';
 import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/get_album.dart';
-import 'package:sticker_swap_app/src/modules/sticker/presenter/widgets/bottom_sheet_sticker.dart';
+import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/update_sticker.dart';
 import 'package:sticker_swap_app/src/utils/const/limits_group_utils.dart';
 
 class StickerBloc{
@@ -19,6 +19,7 @@ class StickerBloc{
   AlbumManager albumManager = Modular.get<AlbumManager>();
 
   IGetAlbum getAlbumUsecase = Modular.get<IGetAlbum>();
+  IUpdateSticker updateStickerUsecase = Modular.get<IUpdateSticker>();
 
   int firstGroup= LimitsGroupUtils.firstGroup;
   int lastGroup= LimitsGroupUtils.lastGroup;
@@ -31,13 +32,13 @@ class StickerBloc{
   Stream<bool> get getStatus => _statusStream.stream;
 
 
-  TextEditingController searchController = TextEditingController();
+  final searchController = TextEditingController();
 
 
   ///<!Casos de uso>
   Future<void> getAlbum() async{
     if(albumManager.albumView == null){
-      Album album = await getAlbumUsecase(user: user, auth: auth);
+      Album album = await getAlbumUsecase(user: user,);
       albumManager.setBaseAlbum(album);
       _statusStream.sink.add(true);
     }
@@ -118,10 +119,9 @@ class StickerBloc{
       albumManager.repetidas++;
     }
 
-    putAlbum(user.id, albumManager.album.toJson(), auth.token);
+    updateStickerUsecase(userId: user.id!, sticker: sticker);
     _idModePageStream.sink.add(1);
     _statusStream.sink.add(true);
-    //Enviar adição para servidor e banco interno
   }
 
   void removeSticker(Sticker sticker){
@@ -133,26 +133,9 @@ class StickerBloc{
       albumManager.repetidas--;
     }
 
-    putAlbum(user.id, albumManager.album.toJson(), auth.token);
+    updateStickerUsecase(userId: user.id!, sticker: sticker);
     _idModePageStream.sink.add(1);
     _statusStream.sink.add(true);
-    //Enviar adição para servidor e banco interno
-  }
-
-  void detailsSticker(Sticker sticker){
-    showModalBottomSheet<dynamic>(
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(
-            topLeft:  Radius.circular(12.0),
-            topRight:  Radius.circular(12.0)
-        )),
-        backgroundColor: Colors.white,
-        context: Modular.routerDelegate.navigatorKey.currentContext!,
-        builder: (_) => BottomSheetSticker(
-          sticker: sticker,
-          removeSticker: removeSticker,
-          openDetails: (Sticker sticker){print("Abir detalhes");},
-        )
-    );
   }
 
 
