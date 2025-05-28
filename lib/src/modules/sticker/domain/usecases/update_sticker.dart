@@ -13,15 +13,12 @@ class UpdateStickerImpl extends IUpdateSticker{
   Future<bool> call({required int userId, required Sticker sticker}) async{
     try{
       await _httpService.put(
-          endpoint: "/api/usuario/$userId/album",
+          endpoint: "stickers/${sticker.id}",
           extraHeaders: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          data: {
-            "quantity": sticker.quantity,
-            "id-sticker": sticker.id,
-          }
+          data: {"amount": sticker.quantity,}
       );
       return true;
     }catch(e){

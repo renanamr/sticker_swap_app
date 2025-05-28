@@ -19,11 +19,10 @@ class HttpService{
   }) async{
     try{
       return await _dio.get(
-          "$_apiUrl$endpoint",
+          "$_apiUrl/api/$endpoint",
           queryParameters: queryParameters,
           options: Options(headers: _getHeaders(extraHeaders))
       );
-
     } on DioException catch(e){
       throw HttpException(e.message!);
     } catch(e){
@@ -37,7 +36,7 @@ class HttpService{
     Map<String, dynamic>? extraHeaders,
   }) async{
     return await _dio.post(
-      "$_apiUrl$endpoint",
+      "$_apiUrl/api/$endpoint",
       data: data,
       options: Options(headers: _getHeaders(extraHeaders))
     );
@@ -51,7 +50,7 @@ class HttpService{
   }) async{
     try{
       return await _dio.put(
-          "$_apiUrl$endpoint",
+          "$_apiUrl/api/$endpoint",
           data: data,
           queryParameters: queryParameters,
           options: Options(headers: _getHeaders(extraHeaders))

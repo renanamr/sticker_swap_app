@@ -13,9 +13,8 @@ class LoginUseCase implements ILogin {
   Future<Auth> call(String email, String password) async {
     try{
       final response = await _httpService.post(
-          endpoint: '/api/login',
-          data: {'email': email, 'password': password}
-      );
+          endpoint: '/accounts/login/',
+          data: {'email': email, 'password': password});
 
       if(response.statusCode == 201 || response.statusCode == 203){
         var result = response.data as Map;

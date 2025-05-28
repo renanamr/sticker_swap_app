@@ -30,11 +30,11 @@ class RegisterScreenState extends State<RegisterScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
+            Padding(
               padding: const EdgeInsets.fromLTRB(25, 60, 25, 40),
               child: Image.asset('assets/images/logo.png'),
             ),
-            Container(
+            Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextField(
                 controller: controller.email,
@@ -49,7 +49,21 @@ class RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            Container(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: TextField(
+                controller: controller.username,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90.0),
+                    ),
+                    labelText: 'Username',
+                    prefixIcon: const Icon(Icons.person),
+                    errorText: !_validate ? "Formato inválido" : null
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextField(
                 controller: controller.password,
@@ -63,7 +77,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            Container(
+            Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextField(
                 controller: controller.passwordConfirm,

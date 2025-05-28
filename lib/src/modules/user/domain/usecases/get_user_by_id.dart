@@ -15,7 +15,7 @@ class GetUserByIDImpl implements IGetUserByID{
     //TODO: Remover mock posteriormente
     return _mock();
     try{
-      final response = await _httpService.get(endpoint: "api/user/$idUser");
+      final response = await _httpService.get(endpoint: "accounts/$idUser");
       return UserModel.fromMap(response.data);
     }catch(e){
       rethrow;

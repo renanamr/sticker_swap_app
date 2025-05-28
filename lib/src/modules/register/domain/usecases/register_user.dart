@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sticker_swap_app/src/modules/register/domain/entities/register.dart';
@@ -13,11 +15,13 @@ class RegisterUserUseCase implements IRegisterUser {
   Future<bool> call(Register register) async {
     try{
       final response = await dio.post(
-          '${dotenv.env['API_URI']!}/api/cadastro',
-          data: register.toMap());
+          '${dotenv.env['API_URI']!}/api/accounts/register/',
+          data: jsonEncode(register.toMap()));
 
+      print(response.data);
       return response.statusCode == 201;
     }catch(e){
+      print(e);
       return false;
     }
   }

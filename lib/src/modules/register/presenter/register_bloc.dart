@@ -9,6 +9,7 @@ import 'package:sticker_swap_app/src/modules/sticker/domain/usecases/generate_ba
 
 class RegisterBloc{
   final email = TextEditingController();
+  final username = TextEditingController();
   final password = TextEditingController();
   final passwordConfirm = TextEditingController();
 
@@ -26,6 +27,7 @@ class RegisterBloc{
     final register = Register(
       email: email.text,
       password: password.text,
+      username: username.text,
       name: "Renan Alves",
     );
 
@@ -48,6 +50,7 @@ class RegisterBloc{
 
   void dispose(){
     email.dispose();
+    username.dispose();
     password.dispose();
     passwordConfirm.dispose();
   }
