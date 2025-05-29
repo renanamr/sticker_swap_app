@@ -2,5 +2,7 @@ class Auth{
     String? token;
     String? refreshToken;
 
-    Auth({this.token, this.refreshToken});
+    String? idUserAuthenticated;
+
+    Auth({this.token, this.refreshToken, this.idUserAuthenticated});
 }

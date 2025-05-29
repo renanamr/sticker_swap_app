@@ -18,10 +18,8 @@ class RegisterUserUseCase implements IRegisterUser {
           '${dotenv.env['API_URI']!}/api/accounts/register/',
           data: jsonEncode(register.toMap()));
 
-      print(response.data);
       return response.statusCode == 201;
     }catch(e){
-      print(e);
       return false;
     }
   }

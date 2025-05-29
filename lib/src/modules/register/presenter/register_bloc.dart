@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
 import 'package:sticker_swap_app/src/core/entities/album.dart';
 import 'package:sticker_swap_app/src/modules/register/domain/entities/register.dart';
@@ -13,26 +14,42 @@ class RegisterBloc{
   final password = TextEditingController();
   final passwordConfirm = TextEditingController();
 
+  final firstName = TextEditingController();
+  final lastName = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
+
+
   final registerUserUseCase = Modular.get<IRegisterUser>();
+
+  final _loadingStream = BehaviorSubject.seeded(false);
+  Stream<bool> get isLoading => _loadingStream.stream;
 
   void toLoginPage()=> Modular.to.pushReplacementNamed("/login/");
 
   Future<void> register() async{
+    if(!formKey.currentState!.validate()){
+      return;
+    }
+
     if(passwordConfirm.text != password.text){
       alertMessage("Não foi possivel realizar o cadastro. Senhas não são iguais!");
       return;
     }
 
-    //TODO: Colocar nome real
+    _loadingStream.sink.add(true);
+
     final register = Register(
       email: email.text,
       password: password.text,
       username: username.text,
-      name: "Renan Alves",
+      firstName: firstName.text,
+      lastName: lastName.text,
     );
 
     final success = await registerUserUseCase(register);
 
+    _loadingStream.sink.add(false);
     if(success){
       await alertMessage("Usuário cadastrado com sucesso!");
       toLoginPage();
@@ -53,5 +70,9 @@ class RegisterBloc{
     username.dispose();
     password.dispose();
     passwordConfirm.dispose();
+    firstName.dispose();
+    lastName.dispose();
+
+    _loadingStream.close();
   }
 }
