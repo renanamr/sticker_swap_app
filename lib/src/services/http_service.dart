@@ -42,14 +42,14 @@ class HttpService{
     );
   }
 
-  Future put({
+  Future patch({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? extraHeaders,
     Map<String, dynamic>? queryParameters
   }) async{
     try{
-      return await _dio.put(
+      return await _dio.patch(
           "$_apiUrl/api/$endpoint",
           data: data,
           queryParameters: queryParameters,
@@ -65,7 +65,7 @@ class HttpService{
     Map<String, dynamic> headers = {};
 
     if(_auth.token != null) {
-      headers.addAll({'Authorization': 'bearer ${_auth.token}'});
+      headers.addAll({'Authorization': 'Baerer ${_auth.token}'});
     }
 
     if (extraHeaders != null) headers.addAll(extraHeaders);

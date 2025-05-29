@@ -23,6 +23,6 @@ class GetUserImpl implements IGetUser{
   }
 
   User _mock()=>
-      User(id: 1, username: "renan", name: "renan.rocha", image: "", email: "r@gamil,");
+      User(id: 1, username: "renan", firstName: "renan.rocha", image: "", email: "r@gamil,");
 
 }

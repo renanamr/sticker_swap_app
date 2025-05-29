@@ -4,7 +4,8 @@ class UserModel extends User{
 
   UserModel({
     super.id,
-    super.name,
+    super.firstName,
+    super.lastName,
     super.email,
     super.image,
     super.username,
@@ -13,9 +14,10 @@ class UserModel extends User{
   factory UserModel.fromMap(Map<String, dynamic> map){
     return UserModel(
         id: map['id'],
-        name: map['name'],
+        firstName: map['first_name'],
+        lastName: map["last_name"],
         email: map['email'],
-        image: map['image'],
+        image: map['picture'],
         username: map['username'],
     );
   }

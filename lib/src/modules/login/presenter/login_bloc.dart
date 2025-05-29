@@ -23,6 +23,7 @@ class LoginBloc {
       final authLogin = await loginUseCase(username.text, password.text);
       auth.token = authLogin.token;
       auth.refreshToken = authLogin.refreshToken;
+      auth.idUserAuthenticated = authLogin.idUserAuthenticated;
 
       return toSyncUserData();
     }catch(e){

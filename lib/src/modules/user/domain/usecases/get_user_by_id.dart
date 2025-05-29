@@ -12,8 +12,6 @@ class GetUserByIDImpl implements IGetUserByID{
 
   @override
   Future<User> call (int idUser) async{
-    //TODO: Remover mock posteriormente
-    return _mock();
     try{
       final response = await _httpService.get(endpoint: "accounts/$idUser");
       return UserModel.fromMap(response.data);
@@ -21,13 +19,5 @@ class GetUserByIDImpl implements IGetUserByID{
       rethrow;
     }
   }
-
-  User _mock()=>User(
-    image: "",
-    name: "Renan",
-    email: "r@gmail",
-    id: 1,
-    username: "renan.rocha",
-  );
 
 }

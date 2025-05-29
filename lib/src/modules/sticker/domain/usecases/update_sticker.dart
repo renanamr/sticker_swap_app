@@ -12,7 +12,7 @@ class UpdateStickerImpl extends IUpdateSticker{
   @override
   Future<bool> call({required int userId, required Sticker sticker}) async{
     try{
-      await _httpService.put(
+      await _httpService.patch(
           endpoint: "stickers/${sticker.id}",
           extraHeaders: {
             'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ class PostMessageImpl implements IPostMessage{
     //TODO: Remover Mock
     return true;
     try{
-      final response = await _httpService.put(
+      final response = await _httpService.post(
           endpoint: "api/update_message",
           data: _getData(message)
       );

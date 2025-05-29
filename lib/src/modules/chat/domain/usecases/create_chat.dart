@@ -12,7 +12,7 @@ class CreateChatImpl implements ICreateChat{
     try{
       return Chat(
         id: 1,
-        name: otherUser.name!,
+        name: otherUser.firstName!,
         image: "",
       );
     }catch(e){

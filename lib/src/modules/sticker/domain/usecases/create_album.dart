@@ -11,7 +11,7 @@ class CreateAlbumImpl extends ICreateAlbum{
   @override
   Future<bool> call({required int userId, required album}) async{
     try{
-      await _httpService.put(
+      await _httpService.post(
           endpoint: "/api/usuario/$userId/album",
           extraHeaders: {
             'Content-Type': 'application/json',

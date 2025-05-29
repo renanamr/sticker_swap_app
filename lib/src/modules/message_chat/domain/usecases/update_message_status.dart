@@ -22,7 +22,7 @@ class UpdateMessageStatusImpl implements IUpdateMessageStatus{
     //TODO: Remover Mock
     return true;
     try{
-      final response = await _httpService.put(
+      final response = await _httpService.patch(
         endpoint: "api/update_message",
         data: {
           "status-message": newStatus
