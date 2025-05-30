@@ -1,7 +1,7 @@
 class Message{
 
   int id;
-  int type;
+  String type;
   int idSender;
   String message;
 

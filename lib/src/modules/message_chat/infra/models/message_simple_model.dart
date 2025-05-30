@@ -7,8 +7,8 @@ class MessageSimpleModel extends MessageSimple {
   factory MessageSimpleModel.fromMap(Map<String, dynamic> map) {
     return MessageSimpleModel(
       id: map['id'],
-      message: map['message'],
-      idSender: map['idSender'],
+      message: map['text_content'],
+      idSender: map['sender'],
     );
   }
 }

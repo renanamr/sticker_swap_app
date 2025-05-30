@@ -22,9 +22,7 @@ class GetAlbumImpl extends IGetAlbum{
       }
     );
 
-    print(response.data);
     album = Album.fromJson(response.data);
-
     return album;
   }
 }

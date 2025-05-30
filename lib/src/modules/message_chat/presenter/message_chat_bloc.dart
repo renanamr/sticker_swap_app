@@ -79,8 +79,7 @@ class MessageChatBloc{
       final message =
       MessageSimple(message: textController.text, idSender: _user.id!, id: 0);
 
-      final sucesso =
-      await _postMessageUseCase(message: message, idChat: chat.id);
+      final sucesso = await _postMessageUseCase(message: message, idChat: chat.id);
 
       if (sucesso) {
         messages.add(message);

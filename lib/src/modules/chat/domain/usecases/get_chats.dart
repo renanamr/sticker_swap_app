@@ -15,7 +15,7 @@ class GetChatsImpl implements IGetChats{
   Future<List<Chat>> call({required int idUser}) async{
     try{
       final response = await _httpService.get(
-        endpoint: "chat/conversas/user/$idUser",);
+        endpoint: "chat/chats/user/$idUser",);
       return ChatModel.listFromJson(response.data, idUser);
     }catch(e){
       rethrow;

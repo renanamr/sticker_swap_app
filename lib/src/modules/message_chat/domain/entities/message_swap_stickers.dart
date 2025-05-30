@@ -13,8 +13,7 @@ class MessageSwapStickers extends Message{
     required this.stickersNeed,
     required this.stickersSender,
     required this.status,
-
-  super.type = 1,
+    super.type = "suggestion",
     super.message = "Sujestão de troca",
   });
 

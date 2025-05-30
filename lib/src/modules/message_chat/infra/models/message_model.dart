@@ -18,14 +18,14 @@ class MessageModel extends Message {
     );
   }
 
-  static List<MessageModel> listFromJson(List<dynamic> json) {
+  static List<Message> listFromJson(List<dynamic> json) {
     return (json)
         .map((e){
-          if(e['type'] == 0) {
-            return MessageSimpleModel.fromMap(e as Map<String, dynamic>) as MessageModel;
+          if(e['message_type'] == "text") {
+            return MessageSimpleModel.fromMap(e as Map<String, dynamic>) as Message;
           }
-          if(e['type'] == 2) {
-            return MessagePlaceModel.fromMap(e as Map<String, dynamic>) as MessageModel;
+          if(e['message_type'] == "place") {
+            return MessagePlaceModel.fromMap(e as Map<String, dynamic>) as Message;
           }
 
           return MessageModel.fromMap(e as Map<String, dynamic>);

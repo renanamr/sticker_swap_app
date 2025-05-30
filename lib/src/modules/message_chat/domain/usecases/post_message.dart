@@ -37,11 +37,11 @@ class PostMessageImpl implements IPostMessage{
 
   Map<String, dynamic> _getData(Message message, int idChat){
     switch(message.type){
-      case 0:
+      case "text":
         return _mapSimpleMessage(message, idChat);
-      case 1:
+      case "suggestion":
         return _mapSwapMessage(message, idChat);
-      case 2:
+      case "location":
         return _mapPlaceMessage(message, idChat);
     }
 
@@ -50,7 +50,7 @@ class PostMessageImpl implements IPostMessage{
 
   Map<String, dynamic> _mapSimpleMessage(Message message, int idChat){
     return {
-      "message_type": 0,
+      "message_type": message.type,
       "text_content": message.message,
       "sender": message.idSender,
       "chat": idChat,
@@ -60,7 +60,7 @@ class PostMessageImpl implements IPostMessage{
   Map<String, dynamic> _mapSwapMessage(Message message, int idChat){
     MessageSwapStickers messageSwap = message as MessageSwapStickers;
     return {
-      "message_type": 1,
+      "message_type": message.type,
       "chat": idChat,
       "text_content": messageSwap.message,
       "sender": messageSwap.idSender,
@@ -73,7 +73,7 @@ class PostMessageImpl implements IPostMessage{
   Map<String, dynamic> _mapPlaceMessage(Message message, int idChat){
     MessagePlace messagePlace = message as MessagePlace;
     return {
-      "message_type": 2,
+      "message_type": message.type,
       "chat": idChat,
       "text_content": messagePlace.message,
       "sender": messagePlace.idSender,

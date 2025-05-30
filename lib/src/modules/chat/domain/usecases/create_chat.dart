@@ -18,7 +18,7 @@ class CreateChatImpl implements ICreateChat{
   Future<Chat?> call({required User user, required User otherUser}) async{
     try{
       final response = await _httpService.post(
-        endpoint: "chat/conversas/",
+        endpoint: "chat/chats/",
         data: jsonEncode({"participants": [user.id, otherUser.id]})
       );
 
