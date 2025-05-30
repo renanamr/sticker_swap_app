@@ -14,8 +14,8 @@ class Sticker {
     return {
       "id": this.id,
       "text": this.text,
-      "idGroup": this.idGroup,
-      "quantity": this.quantity,
+      "sticker_group": this.idGroup,
+      "amout": this.quantity,
     };
   }
 

@@ -19,8 +19,6 @@ class GetMessagesImpl implements IGetMessages{
   @override
   Future<List<Message>> call({required int idChat, required int lastID}) async{
     try{
-      // TODO: Remover o Mock
-      return _mock(idChat: idChat, lastID: lastID);
       final response = await _httpService.get(
         endpoint: "api/chat/$idChat",
         queryParameters: {
@@ -32,42 +30,4 @@ class GetMessagesImpl implements IGetMessages{
       rethrow;
     }
   }
-
-  List<Message> _mock({required int idChat, required int lastID}){
-
-    final albumSender = Album();
-    final albumNeed = Album();
-
-    albumNeed.collectionStickers = {
-      1 : [
-        Sticker(id: 0, text: "BRA 2", quantity: 1, idGroup: 1),
-        Sticker(id: 0, text: "BRA 3", quantity: 1, idGroup: 1),
-        Sticker(id: 0, text: "BRA 20", quantity: 1, idGroup: 1)
-      ],
-      2 : [Sticker(id: 0, text: "FWC 13", quantity: 1, idGroup: 1)]
-    };
-
-    albumSender.collectionStickers = {
-      1 : [
-        Sticker(id: 0, text: "BRA 7", quantity: 1, idGroup: 1),
-        Sticker(id: 0, text: "BRA 5", quantity: 1, idGroup: 1)
-      ],
-      2 : [Sticker(id: 0, text: "FWC 22", quantity: 1, idGroup: 1)]
-    };
-
-    return idChat == 0 ? [
-      MessageSwapStickers(
-        id: 3,
-        idSender: 1,
-        status: StatusMessageConfirm.wait,
-        stickersSender: albumSender,
-        stickersNeed: albumNeed,
-      ),
-      MessagePlace(id: 5, idSender: 1, time: "14:30", place: "Leitura, Natal shopping", date: "15h", status: StatusMessageConfirm.wait),
-      MessageSimple(id: 0, message: "Vc tem figurinhas pra trocar?", idSender: 0)
-    ] : [
-      MessageSimple(id: 2, message: "Tite não me levou para copa.", idSender: 1),
-    ];
-  }
-
 }

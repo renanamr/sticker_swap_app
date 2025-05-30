@@ -15,14 +15,15 @@ class GetAlbumImpl extends IGetAlbum{
     Album album = Album();
 
     final response = await _httpService.get(
-      endpoint: "/api/usuario/${user.id}/album",
+      endpoint: "albuns/${user.id}",
       extraHeaders: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       }
     );
 
-    album = Album.fromJson(response.data['body']);
+    print(response.data);
+    album = Album.fromJson(response.data);
 
     return album;
   }
