@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:sticker_swap_app/src/modules/message_chat/domain/entities/message.dart';
 import 'package:sticker_swap_app/src/modules/message_chat/domain/entities/message_place.dart';
 import 'package:sticker_swap_app/src/modules/message_chat/domain/entities/message_swap_stickers.dart';
@@ -19,12 +21,10 @@ class PostMessageImpl implements IPostMessage{
     required Message message,
     required int idChat
   }) async{
-    //TODO: Remover Mock
-    return true;
     try{
       final response = await _httpService.post(
-          endpoint: "api/update_message",
-          data: _getData(message)
+          endpoint: "chat/mensagens/",
+          data: jsonEncode(_getData(message, idChat))
       );
 
       message.id = response.data["id"];
@@ -35,50 +35,50 @@ class PostMessageImpl implements IPostMessage{
   }
 
 
-  Map<String, dynamic> _getData(Message message){
+  Map<String, dynamic> _getData(Message message, int idChat){
     switch(message.type){
       case 0:
-        return _mapSimpleMessage(message);
+        return _mapSimpleMessage(message, idChat);
       case 1:
-        return _mapSwapMessage(message);
+        return _mapSwapMessage(message, idChat);
       case 2:
-        return _mapPlaceMessage(message);
+        return _mapPlaceMessage(message, idChat);
     }
 
     return {};
   }
 
-  Map<String, dynamic> _mapSimpleMessage(Message message){
+  Map<String, dynamic> _mapSimpleMessage(Message message, int idChat){
     return {
-      "id": message.id,
-      "type": 0,
-      "message": message.message,
-      "idSender": message.idSender,
+      "message_type": 0,
+      "text_content": message.message,
+      "sender": message.idSender,
+      "chat": idChat,
     };
   }
 
-  Map<String, dynamic> _mapSwapMessage(Message message){
+  Map<String, dynamic> _mapSwapMessage(Message message, int idChat){
     MessageSwapStickers messageSwap = message as MessageSwapStickers;
     return {
-      "id": messageSwap.id,
-      "type": 1,
-      "message": messageSwap.message,
-      "idSender": messageSwap.idSender,
+      "message_type": 1,
+      "chat": idChat,
+      "text_content": messageSwap.message,
+      "sender": messageSwap.idSender,
       "status": messageSwap.status,
       "stickerNeed": messageSwap.stickersNeed.toMap(),
       "stickerSender": messageSwap.stickersSender.toMap(),
     };
   }
 
-  Map<String, dynamic> _mapPlaceMessage(Message message){
+  Map<String, dynamic> _mapPlaceMessage(Message message, int idChat){
     MessagePlace messagePlace = message as MessagePlace;
     return {
-      "id": messagePlace.id,
-      "type": 2,
-      "message": messagePlace.message,
-      "idSender": messagePlace.idSender,
-      "date": messagePlace.date,
-      "place": messagePlace.place,
+      "message_type": 2,
+      "chat": idChat,
+      "text_content": messagePlace.message,
+      "sender": messagePlace.idSender,
+      "suggestion_data": messagePlace.date,
+      "location_data": messagePlace.place,
       "status": messagePlace.status,
       "time": messagePlace.time
     };

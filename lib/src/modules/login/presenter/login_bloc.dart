@@ -27,7 +27,7 @@ class LoginBloc {
 
       return toSyncUserData();
     }catch(e){
-      alertMessage("E-mail e senha não conferem. Altere os dados e tente novamente.");
+      alertMessage("Username e senha não conferem. Altere os dados e tente novamente.");
     }
     _loadingStream.sink.add(false);
   }

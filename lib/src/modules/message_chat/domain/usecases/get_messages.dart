@@ -19,11 +19,9 @@ class GetMessagesImpl implements IGetMessages{
   @override
   Future<List<Message>> call({required int idChat, required int lastID}) async{
     try{
+      return [];
       final response = await _httpService.get(
-        endpoint: "api/chat/$idChat",
-        queryParameters: {
-            "last-id": lastID
-        }
+        endpoint: "chat/conversas/$idChat/mensagens/",
       );
       return MessageModel.listFromJson(response.data);
     }catch(e){

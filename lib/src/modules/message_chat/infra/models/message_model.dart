@@ -11,20 +11,22 @@ class MessageModel extends Message {
 
   factory MessageModel.fromMap(Map<String, dynamic> map) {
     return MessageModel(
-      id: map['id'],
-      type: map['type'],
-      message: map['message'],
-      idSender: map['idSender'],
+      id: map['chat'],
+      type: map['message_type'],
+      message: map['text_content'],
+      idSender: map['sender'],
     );
   }
 
   static List<MessageModel> listFromJson(List<dynamic> json) {
     return (json)
         .map((e){
-          if(e['type'] == 0)
+          if(e['type'] == 0) {
             return MessageSimpleModel.fromMap(e as Map<String, dynamic>) as MessageModel;
-          if(e['type'] == 2)
+          }
+          if(e['type'] == 2) {
             return MessagePlaceModel.fromMap(e as Map<String, dynamic>) as MessageModel;
+          }
 
           return MessageModel.fromMap(e as Map<String, dynamic>);
         }).toList();
