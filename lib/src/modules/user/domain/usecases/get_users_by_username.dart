@@ -13,7 +13,10 @@ class GetUsersByUsernameImpl implements IGetUsersByUsername{
   @override
   Future<List<User>> call (String username) async{
     try{
-      final response = await _httpService.get(endpoint: "accounts");
+      final response = await _httpService.get(
+        endpoint: "accounts",
+        queryParameters: {"username": username}
+      );
       return UserModel.listFromJson(response.data);
     }catch(e){
       rethrow;

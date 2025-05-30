@@ -65,7 +65,7 @@ class HttpService{
     Map<String, dynamic> headers = {};
 
     if(_auth.token != null) {
-      headers.addAll({'Authorization': 'Baerer ${_auth.token}'});
+      headers.addAll({'Authorization': 'Bearer ${_auth.token}'});
     }
 
     if (extraHeaders != null) headers.addAll(extraHeaders);

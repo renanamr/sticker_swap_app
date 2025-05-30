@@ -21,7 +21,7 @@ class AppModule extends Module {
     i.add<Dio>(() => Dio());
     i.addSingleton<Auth>(Auth.new);
     i.addSingleton<AlbumManager>(AlbumManager.new);
-    i.add<User>(() => User(
+    i.addSingleton<User>(() => User(
         image: "https://pbs.twimg.com/profile_images/1480660529840492546/nTVLSngG_400x400.jpg",));
 
     i.add<SplashScreenBloc>(SplashScreenBloc.new);

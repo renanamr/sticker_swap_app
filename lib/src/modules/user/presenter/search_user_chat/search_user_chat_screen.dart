@@ -96,7 +96,9 @@ class _SearchUserChatScreenState extends State<SearchUserChatScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(user.firstName!, style: const TextStyle(fontSize: 16),),
+                          Text(
+                            user.firstName ?? "Nome não informado",
+                            style: const TextStyle(fontSize: 16),),
                           const SizedBox(height: 6,),
                           Text(
                             user.username!,
