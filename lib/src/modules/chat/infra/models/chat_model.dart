@@ -1,12 +1,12 @@
 import 'package:sticker_swap_app/src/modules/chat/domain/entities/chat.dart';
-import 'package:sticker_swap_app/src/modules/message_chat/infra/models/message_model.dart';
 
 class ChatModel extends Chat {
   ChatModel({
       required super.id,
       required super.name,
       required super.image,
-      required super.lastMessage
+      required super.lastMessage,
+      super.idUser,
   });
 
   factory ChatModel.fromMap(Map<String, dynamic> map, int myIdUser) {
@@ -22,6 +22,7 @@ class ChatModel extends Chat {
 
     return ChatModel(
       id: map['id'],
+      idUser: map["participants"][position],
       name: map['participants_usernames'][position],
       image: map['picture'] ?? "",
       lastMessage: null,
