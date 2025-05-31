@@ -7,7 +7,7 @@ import 'package:sticker_swap_app/src/modules/login/domain/usecases/login.dart';
 
 class LoginBloc {
 
-  final email = TextEditingController();
+  final username = TextEditingController();
   final password = TextEditingController();
   bool validate = true;
 
@@ -19,16 +19,15 @@ class LoginBloc {
 
   Future<void> login() async {
     try{
-      return toSyncUserData();
-
       _loadingStream.sink.add(true);
-      final authLogin = await loginUseCase(email.text, password.text);
+      final authLogin = await loginUseCase(username.text, password.text);
       auth.token = authLogin.token;
       auth.refreshToken = authLogin.refreshToken;
+      auth.idUserAuthenticated = authLogin.idUserAuthenticated;
 
       return toSyncUserData();
     }catch(e){
-      alertMessage("E-mail e senha não conferem. Altere os dados e tente novamente.");
+      alertMessage("Username e senha não conferem. Altere os dados e tente novamente.");
     }
     _loadingStream.sink.add(false);
   }
@@ -41,7 +40,7 @@ class LoginBloc {
 
 
   void dispose() {
-    email.dispose();
+    username.dispose();
     password.dispose();
     _loadingStream.close();
   }

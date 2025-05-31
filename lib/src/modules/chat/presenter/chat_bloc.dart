@@ -45,7 +45,7 @@ class ChatBloc{
       );
 
       //Verificar se informacao foi recebida
-      if(result != "-1") _getUserByIDAndCreateChat(idUser: result);
+      if(result != "-1") _getUserByIDAndCreateChat(idUser: int.parse(result));
     }catch(e){
       alertMessage("Ops... Não foi possível fazer a leitura");
     }
@@ -66,7 +66,7 @@ class ChatBloc{
       .whenComplete(() => _chatsStream.sink.add(chats));
 
   //<! Métodos auxiliares>
-  Future<void> _getUserByIDAndCreateChat({required String idUser}) async{
+  Future<void> _getUserByIDAndCreateChat({required int idUser}) async{
     try{
       final otherUser = await _getUserUseCase(idUser);
       Chat? newChat = await _createChatUseCase(user: _user, otherUser: otherUser);

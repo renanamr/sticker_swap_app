@@ -10,7 +10,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class RegisterScreenState extends State<RegisterScreen> {
-  bool _validate = true;
 
   final controller = Modular.get<RegisterBloc>();
 
@@ -27,75 +26,120 @@ class RegisterScreenState extends State<RegisterScreen> {
         title: const Text('Registrar-se'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.fromLTRB(25, 60, 25, 40),
-              child: Image.asset('assets/images/logo.png'),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: TextField(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Form(
+          key: controller.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 40, 5, 60),
+                child: Image.asset('assets/images/logo.png'),
+              ),
+              TextFormField(
                 controller: controller.email,
+                validator: required,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(90.0),
                     ),
-                    labelText: 'Email', 
+                    labelText: 'Email',
                     prefixIcon: const Icon(Icons.email),
                     hintText: 'email@example.com',
-                    errorText: !_validate ? "Formato inválido" : null
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: TextField(
+              const SizedBox(height: 20,),
+              TextFormField(
+                controller: controller.username,
+                validator: required,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90.0),
+                    ),
+                    labelText: 'Username',
+                    prefixIcon: const Icon(Icons.person),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextFormField(
+                controller: controller.firstName,
+                validator: required,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90.0),
+                    ),
+                    labelText: 'Nome',
+                    prefixIcon: const Icon(Icons.title),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextFormField(
+                controller: controller.lastName,
+                validator: required,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90.0),
+                    ),
+                    labelText: 'Sobrenome',
+                    prefixIcon: const Icon(Icons.title),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextFormField(
                 controller: controller.password,
                 obscureText: true,
+                validator: required,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(90.0),
                     ),
-                    labelText: 'Password',
+                    labelText: 'Senha',
                     prefixIcon: const Icon(Icons.key),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: TextField(
+              const SizedBox(height: 20,),
+              TextFormField(
                 controller: controller.passwordConfirm,
                 obscureText: true,
+                validator: required,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(90.0),
                     ),
-                    labelText: 'Password',
+                    labelText: 'Confirmação da senha',
                     prefixIcon: const Icon(Icons.key),
                 ),
               ),
-            ),
-            Container(
-                height: 80,
-                padding: const EdgeInsets.all(20),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                  ),
-                  child: const Text('Cadastre-se'),
-                  onPressed: () async{
-                    setState(() {
-                      _validate = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.email.text);
-                    });
-
-                    if(_validate) controller.register();
-                  },
-                )),
-          ],
+              const SizedBox(height: 30,),
+              StreamBuilder<bool>(
+                initialData: false,
+                stream: controller.isLoading,
+                builder: (context, snapshot) {
+                  if(snapshot.data == true){
+                    return const Center(child: CircularProgressIndicator(),);
+                  }else{
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(50),
+                      ),
+                      onPressed: controller.register,
+                      child: const Text('Cadastre-se'),
+                    );
+                  }
+                }
+              ),
+            ],
+          ),
         )
       )
     );
   }
+
+  static String? required(String? value,) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Campo obrigatório';
+    }
+    return null;
+  }
+  
 }

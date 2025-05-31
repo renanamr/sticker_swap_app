@@ -115,7 +115,8 @@ class _StickerScreenState extends State<StickerScreen> {
                      Padding(
                        padding: const EdgeInsets.fromLTRB(8, 6, 0, 4),
                        child: Text(
-                         GroupNamesUtils.names[i]!,
+                         //TODO: Ver nomes vazio
+                         GroupNamesUtils.names[i] ?? "Nome não informado",
                          style: const TextStyle(
                            fontWeight: FontWeight.bold,
                            fontSize: 17

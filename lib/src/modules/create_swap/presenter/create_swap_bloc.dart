@@ -41,6 +41,7 @@ class CreateSwapBloc {
   }
 
   void mudarTela(int indexNovaTela) {
+    print("Mudou");
     _indexTelaStream.sink.add(indexNovaTela);
   }
 

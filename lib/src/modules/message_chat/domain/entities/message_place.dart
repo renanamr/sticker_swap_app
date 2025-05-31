@@ -18,7 +18,7 @@ class MessagePlace extends Message{
     required super.id,
     required super.idSender,
 
-    super.type = 2,
+    super.type = "location",
     super.message = "Local de troca",
   });
 

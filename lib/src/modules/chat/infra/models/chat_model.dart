@@ -1,26 +1,37 @@
 import 'package:sticker_swap_app/src/modules/chat/domain/entities/chat.dart';
-import 'package:sticker_swap_app/src/modules/message_chat/infra/models/message_model.dart';
 
 class ChatModel extends Chat {
   ChatModel({
       required super.id,
       required super.name,
       required super.image,
-      required super.lastMessage
+      required super.lastMessage,
+      super.idUser,
   });
 
-  factory ChatModel.fromMap(Map<String, dynamic> map) {
+  factory ChatModel.fromMap(Map<String, dynamic> map, int myIdUser) {
+    int? position;
+    final listParticipants = map["participants"] as List<dynamic>;
+
+    for(int index=0; index < listParticipants.length; index++){
+      if(myIdUser != map["participants"][index]){
+        position = index;
+        break;
+      }
+    }
+
     return ChatModel(
       id: map['id'],
-      name: map['name'],
-      image: map['image'],
-      lastMessage: MessageModel.fromMap(map['lastMessage']),
+      idUser: map["participants"][position],
+      name: map['participants_usernames'][position],
+      image: map['picture'] ?? "",
+      lastMessage: null,
     );
   }
 
-  static List<ChatModel> listFromJson(List<dynamic> json) {
+  static List<ChatModel> listFromJson(List<dynamic> json, int myIdUser) {
     return (json)
-        .map((e) => ChatModel.fromMap(e as Map<String, dynamic>))
+        .map((e) => ChatModel.fromMap(e as Map<String, dynamic>, myIdUser))
         .toList();
   }
 }

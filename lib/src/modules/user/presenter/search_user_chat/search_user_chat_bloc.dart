@@ -31,6 +31,7 @@ class SearchUserChatBloc{
       final text = searchController.text;
 
       users = await _getUsersByUsernameUseCase(text);
+      users.removeWhere((user)=> user.id == _user.id);
 
       _loadingStream.sink.add(false);
     }catch(e){

@@ -1,4 +1,5 @@
 import 'package:sticker_swap_app/src/modules/message_chat/domain/entities/message_place.dart';
+import 'package:sticker_swap_app/src/utils/const/status_message_confirm.dart';
 
 class MessagePlaceModel extends MessagePlace {
   MessagePlaceModel(
@@ -11,13 +12,26 @@ class MessagePlaceModel extends MessagePlace {
       });
 
   factory MessagePlaceModel.fromMap(Map<String, dynamic> map) {
+    final data = map['location_data'].toString().split("///");
+    final timeAndHour = data[0].split("-");
+
+    final statusConfirm = map["location_confirmed"];
+    int status = StatusMessageConfirm.wait;
+
+    if(statusConfirm != null){
+      status = statusConfirm
+          ? StatusMessageConfirm.accepted
+          : StatusMessageConfirm.rejected;
+    }
+
+
     return MessagePlaceModel(
       id: map['id'],
-      time: map['time'],
-      place: map['place'],
-      status: map['status'],
-      idSender: map['idSender'],
-      date: map['date'],
+      time: timeAndHour[1],
+      place: data[1],
+      status: status,
+      idSender: map['sender'],
+      date: timeAndHour[0],
     );
   }
 }

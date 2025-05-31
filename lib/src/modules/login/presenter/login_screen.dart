@@ -33,16 +33,15 @@ class LoginScreenState extends State<LoginScreen> {
             Container(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextField(
-                controller: controller.email,
+                controller: controller.username,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(90.0),
                     ),
-                    labelText: 'Email',
+                    labelText: 'Username',
                     prefixIcon: const Icon(Icons.email),
-                    hintText: 'email@example.com',
                     errorText:
-                        !controller.validate ? "Formato inválido" : null),
+                        !controller.validate ? "Campo obrigatório" : null),
               ),
             ),
             Container(
@@ -54,7 +53,7 @@ class LoginScreenState extends State<LoginScreen> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(90.0),
                   ),
-                  labelText: 'Password',
+                  labelText: 'Senha',
                   prefixIcon: const Icon(Icons.key),
                 ),
               ),
@@ -103,9 +102,7 @@ class LoginScreenState extends State<LoginScreen> {
               child: const Text('Login'),
               onPressed: () async {
                 setState(() {
-                  controller.validate = RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(controller.email.text);
+                  controller.validate = controller.username.text.isNotEmpty;
                 });
                 if (controller.validate) controller.login();
               },

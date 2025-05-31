@@ -6,6 +6,6 @@ class MessageSimple extends Message{
     required super.message,
     required super.idSender,
 
-    super.type=0
+    super.type="text"
   });
 }

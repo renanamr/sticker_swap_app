@@ -1,13 +1,15 @@
 class User{
   int? id;
-  String? name;
+  String? firstName;
+  String? lastName;
   String? image;
   String? email;
   String? username;
 
   User({
     this.id,
-    this.name,
+    this.firstName,
+    this.lastName,
     this.email,
     this.image,
     this.username,

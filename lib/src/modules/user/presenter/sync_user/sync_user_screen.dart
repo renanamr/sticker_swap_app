@@ -17,7 +17,7 @@ class _SyncUserScreenState extends State<SyncUserScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), controller.getUserData);
+    Timer(const Duration(milliseconds: 600), controller.getUserData);
   }
 
   @override
