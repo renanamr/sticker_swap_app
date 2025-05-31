@@ -22,7 +22,6 @@ class GetMessagesImpl implements IGetMessages{
       final response = await _httpService.get(
         endpoint: "chat/conversas/$idChat/mensagens/",
       );
-      print(response.data);
       return MessageModel.listFromJson(response.data);
     }catch(e){
       rethrow;

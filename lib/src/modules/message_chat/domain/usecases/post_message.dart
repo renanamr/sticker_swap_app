@@ -30,6 +30,7 @@ class PostMessageImpl implements IPostMessage{
       message.id = response.data["id"];
       return true;
     }catch(e){
+      print(e);
       return false;
     }
   }
@@ -75,12 +76,8 @@ class PostMessageImpl implements IPostMessage{
     return {
       "message_type": message.type,
       "chat": idChat,
-      "text_content": messagePlace.message,
       "sender": messagePlace.idSender,
-      "suggestion_data": messagePlace.date,
-      "location_data": messagePlace.place,
-      "status": messagePlace.status,
-      "time": messagePlace.time
+      "location_data": "${messagePlace.date}-${messagePlace.time}///${messagePlace.place}",
     };
   }
 

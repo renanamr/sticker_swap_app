@@ -60,6 +60,24 @@ class HttpService{
     }
   }
 
+  Future put({
+    required String endpoint,
+    Object? data,
+    Map<String, dynamic>? extraHeaders,
+    Map<String, dynamic>? queryParameters
+  }) async{
+    try{
+      return await _dio.put(
+          "$_apiUrl/api/$endpoint",
+          data: data,
+          queryParameters: queryParameters,
+          options: Options(headers: _getHeaders(extraHeaders))
+      );
+    } catch(e){
+      rethrow;
+    }
+  }
+
   /// Organiza Headers de autenticação dos usuários
   Map<String, dynamic> _getHeaders(Map<String, dynamic>? extraHeaders){
     Map<String, dynamic> headers = {};

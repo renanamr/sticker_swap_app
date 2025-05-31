@@ -24,7 +24,7 @@ class MessageModel extends Message {
           if(e['message_type'] == "text") {
             return MessageSimpleModel.fromMap(e as Map<String, dynamic>) as Message;
           }
-          if(e['message_type'] == "place") {
+          if(e['message_type'] == "location") {
             return MessagePlaceModel.fromMap(e as Map<String, dynamic>) as Message;
           }
 

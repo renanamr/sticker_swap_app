@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sticker_swap_app/src/core/alerts/alert_dialog.dart';
+import 'package:sticker_swap_app/src/core/entities/auth.dart';
 import 'package:sticker_swap_app/src/core/entities/user.dart';
 
 class SettingsBloc{
@@ -17,7 +18,13 @@ class SettingsBloc{
   void exitApp() {
     alertMessage(
         "Você tem certeza que deseja sair do Sticker Swap?",
-        onPressed: (){Modular.to.pushReplacementNamed("/login/");},
+        onPressed: (){
+          final auth = Modular.get<Auth>();
+          auth.idUserAuthenticated = null;
+          auth.token = null;
+          auth.refreshToken = null;
+          Modular.to.pushReplacementNamed("/login/");
+          },
         buttonText: "Sim");
   }
 
