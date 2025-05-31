@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:sticker_swap_app/src/modules/sticker/domain/entities/sticker.dart';
 import 'package:sticker_swap_app/src/services/http_service.dart';
 
@@ -13,12 +15,8 @@ class UpdateStickerImpl extends IUpdateSticker{
   Future<bool> call({required int userId, required Sticker sticker}) async{
     try{
       await _httpService.patch(
-          endpoint: "stickers/${sticker.id}",
-          extraHeaders: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          data: {"amount": sticker.quantity,}
+          endpoint: "stickers/${sticker.id}/",
+          data: jsonEncode({"amount": sticker.quantity,})
       );
       return true;
     }catch(e){

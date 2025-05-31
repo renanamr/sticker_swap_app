@@ -12,6 +12,7 @@ class UserModel extends User{
   });
   
   factory UserModel.fromMap(Map<String, dynamic> map){
+    print(map);
     return UserModel(
         id: map['id'],
         firstName: map['first_name'],
